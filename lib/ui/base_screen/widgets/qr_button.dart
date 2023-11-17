@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:ekzh/cubits/card_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +9,7 @@ import 'package:nfc_manager/nfc_manager.dart';
 import '../../../common/navigation/route_name.dart';
 import '../../../common/theme/app_colors.dart';
 import '../../../cubits/app_cubit.dart';
+import '../../../cubits/card_cubit.dart';
 import '../../../models/work.dart';
 
 class QRButton extends StatefulWidget {

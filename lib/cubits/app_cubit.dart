@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:ekzh/services/https_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 import '../models/app_tabs.dart';
 import '../models/state/app_state.dart';
 import '../models/work.dart';
+import '../services/https_service.dart';
 import '../services/reachability_service.dart';
 import '../services/repository.dart';
 

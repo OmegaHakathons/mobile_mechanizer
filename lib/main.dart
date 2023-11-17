@@ -1,11 +1,11 @@
-import 'package:ekzh/services/https_debug_support/my_http_overrides.dart';
-import 'package:ekzh/services/crypto_service.dart';
-import 'package:ekzh/services/local_storage.dart';
-import 'package:ekzh/services/repository.dart';
+import 'package:agro_mech/services/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 // import 'package:nfc_classic_mifare/nfc_classic_mifare.dart';
 
+import 'services/Https_debug_support/my_http_overrides.dart';
+import 'services/crypto_service.dart';
+import 'services/local_storage.dart';
 import 'ui/app.dart';
 import 'dart:io';
 

@@ -1,4 +1,3 @@
-import 'package:ekzh/cubits/card_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../common/navigation/route_name.dart';
 import '../../../common/theme/app_colors.dart';
 import '../../../cubits/app_cubit.dart';
+import '../../../cubits/card_cubit.dart';
 import '../../../models/app_tabs.dart';
 import '../../common/out_button.dart';
 

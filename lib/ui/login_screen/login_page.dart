@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:ekzh/common/navigation/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import '../../common/navigation/route_name.dart';
 import '../../common/theme/app_colors.dart';
 import '../../cubits/app_cubit.dart';
 import '../common/logo_text.dart';

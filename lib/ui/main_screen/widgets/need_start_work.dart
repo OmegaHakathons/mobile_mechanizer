@@ -1,9 +1,9 @@
-import 'package:ekzh/cubits/app_cubit.dart';
-import 'package:ekzh/models/app_tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/theme/app_colors.dart';
+import '../../../cubits/app_cubit.dart';
+import '../../../models/app_tabs.dart';
 import '../../common/out_button.dart';
 
 class NeedStartWork extends StatelessWidget {

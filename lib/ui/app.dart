@@ -1,14 +1,14 @@
-import 'package:ekzh/cubits/card_cubit.dart';
-import 'package:ekzh/services/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../common/navigation/router.dart';
 import '../common/theme/light_theme.dart';
+import '../cubits/card_cubit.dart';
 import '../cubits/geo_cubit.dart';
 import '../cubits/pin_auth_cubit.dart';
 import '../cubits/app_cubit.dart';
 import '../services/geo_service.dart';
+import '../services/local_storage.dart';
 import '../services/reachability_service.dart';
 import '../services/repository.dart';
 
@@ -32,8 +32,7 @@ class App extends StatelessWidget {
           create: (_) => PinAuthCubit(),
         ),
         BlocProvider<CardCubit>(
-            create: (_) => CardCubit(cardRepository: _cardRepository)
-        ),
+            create: (_) => CardCubit(cardRepository: _cardRepository)),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
