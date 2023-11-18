@@ -47,7 +47,7 @@ class AppCubit extends Cubit<AppState> {
     try {
       log('Начали авторизовываться');
       final result = await HttpsService()
-          .auth(email: login, pass: password, type: AuthType.password);
+          .auth(email: login, pass: password);
       log('Авторизовались');
       emit(state.copyWith(isAuthorized: true));
       return result;
@@ -58,7 +58,7 @@ class AppCubit extends Cubit<AppState> {
 
   Future<void> startShift() async {
     log('Начали стартовать СМЕНУ');
-    await HttpsService().startShift();
+    // await HttpsService().startShift();
     log('Стартовали СМЕНУ');
     emit(state.copyWith(currentWork: Work.process));
   }
@@ -83,7 +83,7 @@ class AppCubit extends Cubit<AppState> {
   Future<void> stopShift() async {
     log('Начали завершать СМЕНУ');
     // await stopRoute();
-    await HttpsService().stopShift();
+    // await HttpsService().stopShift();
     log('Завершили СМЕНУ');
     emit(state.copyWith(currentWork: Work.none));
   }

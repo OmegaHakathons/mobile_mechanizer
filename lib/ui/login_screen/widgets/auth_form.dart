@@ -30,8 +30,8 @@ class _AuthFormState extends State<AuthForm> {
   void initState() {
     // getCards();
     super.initState();
-    loginController = TextEditingController()..text = 'test@mail.ru';
-    passwordController = TextEditingController()..text = '123qwe123';
+    loginController = TextEditingController()..text = 'tails';
+    passwordController = TextEditingController()..text = 'fox';
     formKey = GlobalKey<FormState>();
   }
 
@@ -80,14 +80,14 @@ class _AuthFormState extends State<AuthForm> {
             fillColor: AppColors.white,
             text: 'Войти',
             onTap: () {
-              // final future = BlocProvider.of<AppCubit>(context)
-              //     .tryAuth(loginController.text, passwordController.text);
-              // future.then((result) {
+              final future = BlocProvider.of<AppCubit>(context)
+                  .tryAuth(loginController.text, passwordController.text);
+              future.then((result) {
               if (formKey.currentState!.validate()) {
                 BlocProvider.of<AppCubit>(context).updateTab(AppTabs.work);
                 context.goNamed(RouteName.base);
               }
-              // });
+              });
             },
           ),
         ],

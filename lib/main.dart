@@ -19,21 +19,23 @@ void main() async {
   initializeDateFormatting('ru');
 
   // remove httpOverrides on production
+  HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+  await CryptoService().initialize();
+  await Hive.initFlutter();
+  // final repository = await LocalStorage().initialiseHive();
+  final cardRepo = await initialiseHive();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  // HttpOverrides.global = MyHttpOverrides();
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await CryptoService().initialize();
-  // await Hive.initFlutter();
-  // // final repository = await LocalStorage().initialiseHive();
-  // final cardRepo = await initialiseHive();
+  await Repository().initialize();
+  Repository().cardRepository = cardRepo;
+  Repository().startGettingRegistr();
 
-  // await Repository().initialize();
-  // Repository().cardRepository = cardRepo;
-  // Repository().startGettingRegistr();
+  runApp(App());
 
-  // runApp(App(cardRepository: cardRepo));
-
-  // You may set the permission requests to "provisional" which allows the user to choose what type
+// You may set the permission requests to "provisional" which allows the user to choose what type
 // of notifications they would like to receive once the user receives a notification.
 //   final notificationSettings =
 //       await FirebaseMessaging.instance.requestPermission(provisional: false);
