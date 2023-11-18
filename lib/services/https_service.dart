@@ -39,13 +39,9 @@ class HttpsService {
     Map request = {
       "username": email,
       "password": pass,
-      // "type": type == AuthType.password ? "password" : "pin",
     };
     Map<String, String> headers = {
-      // "Accept": "application/json",
       "Content-Type": "application/json",
-      // "Connection": "keep-alive",
-      // "Accept-Encoding": "gzip, deflate, br"
     };
     final url = Uri.https(_baseUrl, '$_api/auth/login');
     final body = json.encode(request);
@@ -58,8 +54,6 @@ class HttpsService {
         );
         if (response.statusCode == 201) {
           var value = response.body;
-          // var value = AuthResponse.fromJson(jsonDecode(response.body));
-          // final token = value.data.token;
           await _tokenService.saveToken(value);
           return value;
         } else {
@@ -119,10 +113,6 @@ class HttpsService {
           headers: headers,
         );
         if (response.statusCode == 200) {
-          // var value = response.body;
-          // var value = AuthResponse.fromJson(jsonDecode(response.body));
-          // final token = value.data.token;
-          // await _tokenService.saveToken(value);
           return;
         } else {
           throw Exception("Failed to logIn");
@@ -132,9 +122,6 @@ class HttpsService {
       retryIf: (e) => e is TimeoutException,
     );
   }
-
-
-
 
 //   Future<RegisterEntities> getRegistr({required DateTime? lastUpdate}) async {
 //     // final token = await _tokenService.getToken();
@@ -427,34 +414,31 @@ class HttpsService {
 //     );
 //   }
 
-//   // MARK: - Pending requests
-//   Future sendPendingRequests(PendingRequest request) async {
-//     final body = request.body;
-//     Map<String, dynamic> headers = json.decode(request.headers);
-//     Map<String, String> finalHeaders =
-//         headers.map((key, value) => MapEntry(key, value.toString()));
-//     final url = Uri.parse(request.url);
+  // MARK: - Pending requests
+  Future sendPendingRequests(PendingRequest request) async {
+    final body = request.body;
+    Map<String, dynamic> headers = json.decode(request.headers);
+    Map<String, String> finalHeaders =
+        headers.map((key, value) => MapEntry(key, value.toString()));
+    final url = Uri.parse(request.url);
 
-//     return retry(
-//       () async {
-//         final response = await _client.post(
-//           url,
-//           headers: finalHeaders,
-//           body: body,
-//         );
-//         if (response.statusCode == 200) {
-//           var value = jsonDecode(response.body);
-//           await Repository().flushPendingRequest(request);
-//           return value;
-//         } else if (response.statusCode == 409) {
-//           await stopShift();
-//           throw TimeoutException("repeat");
-//         } else {
-//           throw Exception("Failed to logIn");
-//         }
-//       },
-//       maxAttempts: 3,
-//       retryIf: (e) => e is TimeoutException,
-//     );
-//   }
+    return retry(
+      () async {
+        final response = await _client.post(
+          url,
+          headers: finalHeaders,
+          body: body,
+        );
+        if (response.statusCode == 200) {
+          var value = jsonDecode(response.body);
+          await Repository().flushPendingRequest(request);
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    );
+  }
 }
