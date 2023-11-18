@@ -1023,7 +1023,7 @@ class HttpsService {
     });
   }
 
-  Future deleteCar({
+  Future deleteAggregate({
     required int id,
     }) async {
     final token = await _tokenService.getToken();
@@ -1035,7 +1035,7 @@ class HttpsService {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",
     };
-    final url = Uri.https(_baseUrl, '$_api/car/$id');
+    final url = Uri.https(_baseUrl, '$_api/aggregate/$id');
     return retry(
       () async {
         final response = await _client.delete(
@@ -1044,7 +1044,7 @@ class HttpsService {
         );
         if (response.statusCode == 200 || response.statusCode == 201) {
           var value = jsonDecode(response.body);
-          log('отправили удаление Car');
+          log('отправили удаление Aggregate');
           return value;
         } else {
           throw Exception("Failed to logIn");
@@ -1054,19 +1054,144 @@ class HttpsService {
       retryIf: (e) => e is TimeoutException,
     ).onError((e, _) async {
       if (e is TimeoutException || e is SocketException) {
-        log('не получилось отправить удаление Car');
+        log('не получилось отправить удаление Aggregate');
         final request = PendingRequest(
             url: url.toString(),
             body: null,
             headers: json.encode(headers),
             id: const Uuid().v4().toString(),
             type: HttpType.delete);
-        log('сохранили удаление Car');
+        log('сохранили удаление Aggregate');
         return await Repository().savePendingRequest(request);
       }
     });
   }
 
+  // MARK: - User
+  Future getUsers() async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/user_data');
+    return retry(
+      () async {
+        final response = await _client.get(url, headers: headers);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('получение user_datas');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить user_datas');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили user_datas на потом');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+  
+  Future getUser({required int id}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    // final body = json.encode(jsonEncode(task));
+    final url = Uri.https(_baseUrl, '$_api/user_data/$id');
+    return retry(
+      () async {
+        final response = await _client.get(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили получение user_data');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить получение user_data');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили получение user_data');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future deleteUser({
+    required int id,
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/user_data/$id');
+    return retry(
+      () async {
+        final response = await _client.delete(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили удаление user_data');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить удаление user_data');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.delete);
+        log('сохранили удаление user_data');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
 
 
   // MARK: - Pending requests
