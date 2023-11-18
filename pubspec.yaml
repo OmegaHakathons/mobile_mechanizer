@@ -30,6 +30,8 @@ dependencies:
   nfc_manager:
   path_provider: ^2.1.1
   uuid: ^4.0.0
+  logger: ^1.4.0
+  dio: ^5.0.0
 
   casa_vertical_stepper: ^0.0.5
 
