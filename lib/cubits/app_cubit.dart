@@ -12,10 +12,13 @@ import '../services/reachability_service.dart';
 import '../services/repository.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit(this.interbetRepo, this.repository) : super(const AppState());
+  AppCubit(
+    this.interbetRepo,
+    // this.repository,
+  ) : super(const AppState());
 
   final ReachabilityService interbetRepo;
-  final Repository repository;
+  // final Repository repository;
 
   void updateTab(AppTabs newTab) {
     emit(state.copyWith(currentTab: newTab));
@@ -32,7 +35,7 @@ class AppCubit extends Cubit<AppState> {
   Future<void> listenToConnectivity() async {
     interbetRepo.onStatusChange.listen((result) {
       if (result == InternetStatus.connected) {
-        repository.sendPendingRequests();
+        // repository.sendPendingRequests();
         emit(state.copyWith(isConnection: true));
       } else {
         emit(state.copyWith(isConnection: false));
@@ -57,38 +60,38 @@ class AppCubit extends Cubit<AppState> {
     log('Начали стартовать СМЕНУ');
     await HttpsService().startShift();
     log('Стартовали СМЕНУ');
-    emit(state.copyWith(currentWork: Work.paused));
-  }
-
-  Future<void> startRoute({
-    required String vehicleNumber,
-    required int busRouteId,
-    required double lat,
-    required double lng,
-  }) async {
-    log('Начали стартовать МАРШРУТ');
-    await HttpsService().startRoute(
-      busRouteId: busRouteId,
-      lat: lat,
-      lng: lng,
-      vehicleNumber: vehicleNumber,
-    );
-    log('Стартовали МАРШРУТ');
     emit(state.copyWith(currentWork: Work.process));
   }
 
+  // Future<void> startRoute({
+  //   required String vehicleNumber,
+  //   required int busRouteId,
+  //   required double lat,
+  //   required double lng,
+  // }) async {
+  //   log('Начали стартовать МАРШРУТ');
+  //   await HttpsService().startRoute(
+  //     busRouteId: busRouteId,
+  //     lat: lat,
+  //     lng: lng,
+  //     vehicleNumber: vehicleNumber,
+  //   );
+  //   log('Стартовали МАРШРУТ');
+  //   emit(state.copyWith(currentWork: Work.process));
+  // }
+
   Future<void> stopShift() async {
     log('Начали завершать СМЕНУ');
-    await stopRoute();
+    // await stopRoute();
     await HttpsService().stopShift();
     log('Завершили СМЕНУ');
-    emit(state.copyWith(currentWork: Work.stop));
+    emit(state.copyWith(currentWork: Work.none));
   }
 
-  Future<void> stopRoute() async {
-    log('Начали завершать МАРШРУТ');
-    await HttpsService().stopRoute();
-    log('Завершили МАРШРУТ');
-    emit(state.copyWith(currentWork: Work.paused));
-  }
+  // Future<void> stopRoute() async {
+  //   log('Начали завершать МАРШРУТ');
+  //   await HttpsService().stopRoute();
+  //   log('Завершили МАРШРУТ');
+  //   emit(state.copyWith(currentWork: Work.paused));
+  // }
 }

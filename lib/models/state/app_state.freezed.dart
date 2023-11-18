@@ -133,8 +133,8 @@ class __$$AppStateImplCopyWithImpl<$Res>
 
 class _$AppStateImpl implements _AppState {
   const _$AppStateImpl(
-      {this.currentTab = AppTabs.main,
-      this.currentWork = Work.stop,
+      {this.currentTab = AppTabs.work,
+      this.currentWork = Work.none,
       this.isConnection = true,
       this.isAuthorized = false});
 

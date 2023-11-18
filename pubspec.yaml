@@ -30,6 +30,10 @@ dependencies:
   nfc_manager:
   path_provider: ^2.1.1
   uuid: ^4.0.0
+
+  casa_vertical_stepper: ^0.0.5
+
+
   # nfc_classic_mifare:
   #   path: D:\Soft\ITMO\MARIYA\Flutter\nfc_classic_mifare-main
 

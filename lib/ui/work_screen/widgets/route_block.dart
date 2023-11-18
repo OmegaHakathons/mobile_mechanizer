@@ -29,7 +29,7 @@ class RouteBlock extends StatelessWidget {
           text: 'Завершить рейс',
           onTap: () {
             NfcManager.instance.stopSession();
-            BlocProvider.of<AppCubit>(context).stopRoute();
+            // BlocProvider.of<AppCubit>(context).stopRoute();
           },
         ),
         const SizedBox(height: 10),

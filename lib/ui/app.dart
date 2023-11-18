@@ -13,30 +13,34 @@ import '../services/reachability_service.dart';
 import '../services/repository.dart';
 
 class App extends StatelessWidget {
-  const App({super.key, required CardRepository cardRepository})
-      : _cardRepository = cardRepository;
-  final CardRepository _cardRepository;
+  const App({super.key});
+
+  // const App({super.key, required CardRepository cardRepository})
+  //     : _cardRepository = cardRepository;
+  // final CardRepository _cardRepository;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AppCubit>(
-          create: (_) => AppCubit(ReachabilityService(), Repository())
-            ..listenToConnectivity(),
+          create: (_) => AppCubit(
+            ReachabilityService(),
+            // Repository(),
+          )..listenToConnectivity(),
         ),
-        BlocProvider<GeoCubit>(
-          create: (_) => GeoCubit(GeoService()),
-        ),
+        // BlocProvider<GeoCubit>(
+        //   create: (_) => GeoCubit(GeoService()),
+        // ),
         BlocProvider<PinAuthCubit>(
           create: (_) => PinAuthCubit(),
         ),
-        BlocProvider<CardCubit>(
-            create: (_) => CardCubit(cardRepository: _cardRepository)),
+        // BlocProvider<CardCubit>(
+        //     create: (_) => CardCubit(cardRepository: _cardRepository)),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'ЕКЖ',
+        title: 'Механизатор',
         theme: themeLight,
         routerConfig: router,
       ),

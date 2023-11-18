@@ -45,7 +45,11 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const LogoText(),
+                  // const LogoText(),
+                  Text(
+                    'ЛОГО + НАЗВАНИЕ',
+                    style: TextStyle(fontSize: 32),
+                  ),
                   const SizedBox(height: 32),
                   Text(
                     'Вход в личный кабинет',

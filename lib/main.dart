@@ -11,16 +11,18 @@ import 'dart:io';
 
 void main() async {
   // remove httpOverrides on production
-  HttpOverrides.global = MyHttpOverrides();
-  WidgetsFlutterBinding.ensureInitialized();
-  await CryptoService().initialize();
-  await Hive.initFlutter();
-  // final repository = await LocalStorage().initialiseHive();
-  final cardRepo = await initialiseHive();
 
-  await Repository().initialize();
-  Repository().cardRepository = cardRepo;
-  Repository().startGettingRegistr();
+  // HttpOverrides.global = MyHttpOverrides();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await CryptoService().initialize();
+  // await Hive.initFlutter();
+  // // final repository = await LocalStorage().initialiseHive();
+  // final cardRepo = await initialiseHive();
 
-  runApp(App(cardRepository: cardRepo));
+  // await Repository().initialize();
+  // Repository().cardRepository = cardRepo;
+  // Repository().startGettingRegistr();
+
+  // runApp(App(cardRepository: cardRepo));
+  runApp(App());
 }

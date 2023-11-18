@@ -70,16 +70,11 @@ class _StartFormFormState extends State<StartForm> {
                   final appCubit = BlocProvider.of<AppCubit>(context);
                   if (formKey.currentState!.validate()) {
                     await geoCubit.getCurrentLocation();
-                    if (appCubit.state.currentWork == Work.stop) {
+                    if (appCubit.state.currentWork == Work.none) {
                       await appCubit.startShift();
                     }
-                    await appCubit.startRoute(
-                      vehicleNumber: transportController.text,
-                      busRouteId: 21,
-                      lat: geoCubit.state.userLocation.latitude,
-                      lng: geoCubit.state.userLocation.longitude,
-                    );
-                    appCubit.updateTab(AppTabs.main);
+
+                    appCubit.updateTab(AppTabs.work);
                   }
                 },
                 child: const Text('Начать')),

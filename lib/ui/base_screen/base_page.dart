@@ -27,8 +27,8 @@ class BasePage extends StatelessWidget {
   const BasePage({super.key});
 
   final _bottomItems = const [
-    BottomItem(icon: Icons.home, label: 'Главная'),
-    BottomItem(icon: Icons.work_history_rounded, label: 'Смена'),
+    BottomItem(icon: Icons.work, label: 'Задача'),
+    BottomItem(icon: Icons.history, label: 'Прочее'),
   ];
 
   @override
@@ -36,13 +36,13 @@ class BasePage extends StatelessWidget {
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         int currentIndex = AppTabs.values.indexOf(state.currentTab);
-        bool isStop = state.currentWork == Work.stop;
+        bool isStop = state.currentWork == Work.none;
         return Scaffold(
-          body: state.currentTab == AppTabs.main ? MainPage() : WorkPage(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton:
-              state.currentWork == Work.process ? const QRButton() : null,
+          body: state.currentTab == AppTabs.work ? WorkPage() : MainPage(),
+          // floatingActionButtonLocation:
+          //     FloatingActionButtonLocation.centerDocked,
+          // floatingActionButton:
+          //     state.currentWork == Work.process ? const QRButton() : null,
           bottomNavigationBar: BottomAppBar(
             child: SizedBox(
               height: 60,
@@ -53,7 +53,7 @@ class BasePage extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         BlocProvider.of<AppCubit>(context)
-                            .updateTab(AppTabs.main);
+                            .updateTab(AppTabs.work);
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -61,7 +61,7 @@ class BasePage extends StatelessWidget {
                           Icon(
                             _bottomItems[0].icon,
                             color: currentIndex == 0
-                                ? AppColors.blue
+                                ? AppColors.black
                                 : AppColors.greyDark,
                           ),
                           Text(
@@ -71,19 +71,19 @@ class BasePage extends StatelessWidget {
                                 .bodySmall!
                                 .copyWith(
                                     color: currentIndex == 0
-                                        ? AppColors.blue
+                                        ? AppColors.black
                                         : AppColors.greyDark),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  if (!isStop) const Spacer(),
+                  // if (!isStop) const Spacer(),
                   Expanded(
                     child: InkWell(
                       onTap: () {
                         BlocProvider.of<AppCubit>(context)
-                            .updateTab(AppTabs.work);
+                            .updateTab(AppTabs.profile);
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
