@@ -31,7 +31,7 @@ void main() async {
 
   await Repository().initialize();
   Repository().cardRepository = cardRepo;
-  Repository().startGettingRegistr();
+  // Repository().startGettingRegistr();
 
   runApp(App());
 
