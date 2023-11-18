@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:agro_mech/models/task/aggregate.dart';
+import 'package:agro_mech/models/task/car.dart';
 import 'package:agro_mech/models/task/task.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'entities/card_ekzh.dart';
+// import 'entities/card_ekzh.dart';
 import 'entities/tariff.dart';
 import 'https_service.dart';
-import 'secure_storage_service.dart';
+// import 'secure_storage_service.dart';
 // import 'package:hive/hive.dart';
 
 // class LocalStorage {
@@ -15,12 +17,14 @@ Future<CardRepository> initialiseHive() async {
   //key
   const cardKey = 'cards';
   //adapters
-  Hive.registerAdapter(CardAdapter());
-  Hive.registerAdapter(TariffAdapter());
+  // Hive.registerAdapter(CardAdapter());
+  // Hive.registerAdapter(TariffAdapter());
   Hive.registerAdapter(TaskAdapter());
+  Hive.registerAdapter(CarAdapter());
 
   //box
   final box = await Hive.openBox<Task?>(cardKey);
+  final carBox = await Hive.openBox<Car>(cardKey);
   //repos
   return CardRepository(cardBox: box);
 }
