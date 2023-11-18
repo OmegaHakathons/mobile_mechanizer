@@ -34,6 +34,8 @@ dependencies:
   casa_vertical_stepper: ^0.0.5
 
 
+  firebase_core: ^2.22.0
+  firebase_messaging: ^14.7.4
   # nfc_classic_mifare:
   #   path: D:\Soft\ITMO\MARIYA\Flutter\nfc_classic_mifare-main
 
