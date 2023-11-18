@@ -10,9 +10,9 @@ import '../../cubits/app_cubit.dart';
 import '../../models/app_tabs.dart';
 import '../../models/state/app_state.dart';
 import '../../models/work.dart';
+import '../calendar_screen/calendar_page.dart';
 import '../main_screen/main_page.dart';
 import '../work_screen/work_page.dart';
-import 'widgets/qr_button.dart';
 
 class BottomItem {
   final IconData icon;
@@ -27,88 +27,60 @@ class BasePage extends StatelessWidget {
   const BasePage({super.key});
 
   final _bottomItems = const [
+    BottomItem(icon: Icons.calendar_today, label: 'Календарь'),
     BottomItem(icon: Icons.work, label: 'Задача'),
-    BottomItem(icon: Icons.history, label: 'Прочее'),
+    BottomItem(icon: Icons.stacked_line_chart_rounded, label: 'Отчёт'),
   ];
 
   @override
   Widget build(BuildContext context) {
+    log('перестраиваем base');
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         int currentIndex = AppTabs.values.indexOf(state.currentTab);
         bool isStop = state.currentWork == Work.none;
         return Scaffold(
-          body: state.currentTab == AppTabs.work ? WorkPage() : MainPage(),
-          // floatingActionButtonLocation:
-          //     FloatingActionButtonLocation.centerDocked,
-          // floatingActionButton:
-          //     state.currentWork == Work.process ? const QRButton() : null,
+          body: state.currentTab == AppTabs.work
+              ? WorkPage()
+              : state.currentTab == AppTabs.calendar
+                  ? CalendarPage()
+                  : ProfilePage(),
           bottomNavigationBar: BottomAppBar(
             child: SizedBox(
               height: 60,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        BlocProvider.of<AppCubit>(context)
-                            .updateTab(AppTabs.work);
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            _bottomItems[0].icon,
-                            color: currentIndex == 0
-                                ? AppColors.black
-                                : AppColors.greyDark,
+                children: List.generate(
+                    _bottomItems.length,
+                    (index) => Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              BlocProvider.of<AppCubit>(context)
+                                  .updateTab(AppTabs.values[index]);
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  _bottomItems[index].icon,
+                                  color: currentIndex == index
+                                      ? AppColors.black
+                                      : AppColors.greyDark,
+                                ),
+                                Text(
+                                  _bottomItems[index].label,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .copyWith(
+                                          color: currentIndex == index
+                                              ? AppColors.black
+                                              : AppColors.greyDark),
+                                ),
+                              ],
+                            ),
                           ),
-                          Text(
-                            _bottomItems[0].label,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(
-                                    color: currentIndex == 0
-                                        ? AppColors.black
-                                        : AppColors.greyDark),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  // if (!isStop) const Spacer(),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        BlocProvider.of<AppCubit>(context)
-                            .updateTab(AppTabs.profile);
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            _bottomItems[1].icon,
-                            color: currentIndex == 1
-                                ? AppColors.blue
-                                : AppColors.greyDark,
-                          ),
-                          Text(
-                            _bottomItems[1].label,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall!
-                                .copyWith(
-                                    color: currentIndex == 1
-                                        ? AppColors.blue
-                                        : AppColors.greyDark),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                        )),
               ),
             ),
           ),

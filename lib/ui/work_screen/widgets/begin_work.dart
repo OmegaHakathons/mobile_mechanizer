@@ -1,3 +1,4 @@
+import 'package:agro_mech/models/app_tabs.dart';
 import 'package:agro_mech/models/state/app_state.dart';
 import 'package:agro_mech/models/work.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,10 @@ class BeginWork extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () {
                     context.read<AppCubit>().updateWork(Work.process);
+                    context.read<AppCubit>().updateTab(AppTabs.work);
+                    if (context.canPop()) {
+                      context.goNamed(RouteName.base);
+                    }
                   },
                   child: Text('Приступить к работе')))
         ],

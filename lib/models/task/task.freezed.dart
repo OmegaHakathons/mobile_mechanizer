@@ -32,6 +32,9 @@ mixin _$Task {
   int? get consumption => throw _privateConstructorUsedError;
   DateTime get deadline => throw _privateConstructorUsedError;
   StatusTask get status => throw _privateConstructorUsedError;
+  String get executor =>
+      throw _privateConstructorUsedError; // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+  int? get money => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
@@ -57,7 +60,9 @@ abstract class $TaskCopyWith<$Res> {
       String? material,
       int? consumption,
       DateTime deadline,
-      StatusTask status});
+      StatusTask status,
+      String executor,
+      int? money});
 
   $CarCopyWith<$Res> get car;
   $AggregateCopyWith<$Res> get aggregate;
@@ -91,6 +96,8 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? consumption = freezed,
     Object? deadline = null,
     Object? status = null,
+    Object? executor = null,
+    Object? money = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -153,6 +160,14 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusTask,
+      executor: null == executor
+          ? _value.executor
+          : executor // ignore: cast_nullable_to_non_nullable
+              as String,
+      money: freezed == money
+          ? _value.money
+          : money // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -195,7 +210,9 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       String? material,
       int? consumption,
       DateTime deadline,
-      StatusTask status});
+      StatusTask status,
+      String executor,
+      int? money});
 
   @override
   $CarCopyWith<$Res> get car;
@@ -228,6 +245,8 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? consumption = freezed,
     Object? deadline = null,
     Object? status = null,
+    Object? executor = null,
+    Object? money = freezed,
   }) {
     return _then(_$TaskImpl(
       id: null == id
@@ -290,6 +309,14 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusTask,
+      executor: null == executor
+          ? _value.executor
+          : executor // ignore: cast_nullable_to_non_nullable
+              as String,
+      money: freezed == money
+          ? _value.money
+          : money // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -312,7 +339,9 @@ class _$TaskImpl implements _Task {
       this.material,
       this.consumption,
       required this.deadline,
-      required this.status})
+      required this.status,
+      required this.executor,
+      this.money})
       : _steps = steps;
 
   @override
@@ -352,10 +381,15 @@ class _$TaskImpl implements _Task {
   final DateTime deadline;
   @override
   final StatusTask status;
+  @override
+  final String executor;
+// ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+  @override
+  final int? money;
 
   @override
   String toString() {
-    return 'Task(id: $id, type: $type, shortDescription: $shortDescription, steps: $steps, currentStep: $currentStep, car: $car, aggregate: $aggregate, field: $field, minSpeed: $minSpeed, maxSpeed: $maxSpeed, depth: $depth, material: $material, consumption: $consumption, deadline: $deadline, status: $status)';
+    return 'Task(id: $id, type: $type, shortDescription: $shortDescription, steps: $steps, currentStep: $currentStep, car: $car, aggregate: $aggregate, field: $field, minSpeed: $minSpeed, maxSpeed: $maxSpeed, depth: $depth, material: $material, consumption: $consumption, deadline: $deadline, status: $status, executor: $executor, money: $money)';
   }
 
   @override
@@ -385,7 +419,10 @@ class _$TaskImpl implements _Task {
                 other.consumption == consumption) &&
             (identical(other.deadline, deadline) ||
                 other.deadline == deadline) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.executor, executor) ||
+                other.executor == executor) &&
+            (identical(other.money, money) || other.money == money));
   }
 
   @override
@@ -405,7 +442,9 @@ class _$TaskImpl implements _Task {
       material,
       consumption,
       deadline,
-      status);
+      status,
+      executor,
+      money);
 
   @JsonKey(ignore: true)
   @override
@@ -430,7 +469,9 @@ abstract class _Task implements Task {
       final String? material,
       final int? consumption,
       required final DateTime deadline,
-      required final StatusTask status}) = _$TaskImpl;
+      required final StatusTask status,
+      required final String executor,
+      final int? money}) = _$TaskImpl;
 
   @override
   int get id;
@@ -462,6 +503,10 @@ abstract class _Task implements Task {
   DateTime get deadline;
   @override
   StatusTask get status;
+  @override
+  String get executor;
+  @override // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+  int? get money;
   @override
   @JsonKey(ignore: true)
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>

@@ -2,6 +2,7 @@ import 'package:agro_mech/services/repository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
 // import 'package:nfc_classic_mifare/nfc_classic_mifare.dart';
 
 import 'common/di.dart';
@@ -15,6 +16,7 @@ import 'firebase_options.dart';
 
 void main() async {
   await Locator.init();
+  initializeDateFormatting('ru');
 
   // remove httpOverrides on production
 

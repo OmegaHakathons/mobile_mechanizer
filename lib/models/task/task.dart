@@ -27,5 +27,7 @@ class Task with _$Task {
     int? consumption,
     required DateTime deadline,
     required StatusTask status,
+    required String executor, // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+    int? money,
   }) = _Task;
 }

@@ -78,4 +78,5 @@ Task task = Task(
     minSpeed: 8,
     maxSpeed: 12,
     deadline: DateTime.now(),
-    status: StatusTask.process);
+    status: StatusTask.process,
+    executor: 'Иван Иванович');

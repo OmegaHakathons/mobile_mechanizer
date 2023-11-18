@@ -1,1 +1,5 @@
-enum AppTabs { work, profile }
+enum AppTabs {
+  calendar,
+  work,
+  profile,
+}
