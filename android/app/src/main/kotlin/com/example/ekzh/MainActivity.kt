@@ -1,4 +1,4 @@
-package com.example.ekzh
+package com.example.mobile.mechanizer
 
 import io.flutter.embedding.android.FlutterActivity
 
