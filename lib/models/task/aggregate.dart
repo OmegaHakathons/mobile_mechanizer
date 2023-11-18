@@ -6,7 +6,7 @@ part 'aggregate.g.dart';
 
 @Freezed()
 class Aggregate with _$Aggregate {
-  @HiveType(typeId: 24, adapterName: 'CarAdapter')
+  @HiveType(typeId: 24, adapterName: 'AggregateAdapter')
   const factory Aggregate({
     @JsonKey(name: 'id') @HiveField(0) required int id,
     @JsonKey(name: 'name') @HiveField(1) required String name,

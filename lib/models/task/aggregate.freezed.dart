@@ -129,7 +129,7 @@ class __$$AggregateImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 24, adapterName: 'CarAdapter')
+@HiveType(typeId: 24, adapterName: 'AggregateAdapter')
 class _$AggregateImpl implements _Aggregate {
   const _$AggregateImpl(
       {@JsonKey(name: 'id') @HiveField(0) required this.id,

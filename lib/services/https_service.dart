@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:agro_mech/models/task/car.dart';
 import 'package:agro_mech/models/task/task.dart';
 import 'package:http/http.dart';
 import 'package:retry/retry.dart';
@@ -440,7 +441,7 @@ class HttpsService {
       retryIf: (e) => e is TimeoutException,
     ).onError((e, _) async {
       if (e is TimeoutException || e is SocketException) {
-        log('не получилось отправить task');
+        log('не получилось получить task');
         final request = PendingRequest(
             url: url.toString(),
             body: null,
@@ -453,7 +454,7 @@ class HttpsService {
     });
   }
   
-  Future createTasks({required Task task}) async {
+  Future createTask({required Task task}) async {
     final token = await _tokenService.getToken();
     if (token == null) {
       throw Exception("There is no token");
@@ -630,6 +631,225 @@ class HttpsService {
       }
     });
   }
+
+  // MARK: - Car
+  Future getCars() async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/car');
+    return retry(
+      () async {
+        final response = await _client.get(url, headers: headers);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('получение Cars');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить Cars');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили Cars на потом');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+  
+  Future createCar({required Car car}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final body = json.encode(car);
+    final url = Uri.https(_baseUrl, '$_api/car');
+    return retry(
+      () async {
+        final response = await _client.post(
+          url,
+          headers: headers,
+          body: body,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили создание Car');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить создание Car');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: body,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.post);
+        log('сохранили создание Car');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future getCar({required int id}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    // final body = json.encode(jsonEncode(task));
+    final url = Uri.https(_baseUrl, '$_api/car/$id');
+    return retry(
+      () async {
+        final response = await _client.get(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили получение Car');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить получение Car');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили получение Car');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future updateCar({
+    required int id,
+    required Task task
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final body = json.encode(task);
+    final url = Uri.https(_baseUrl, '$_api/car/$id');
+    return retry(
+      () async {
+        final response = await _client.put(
+          url,
+          headers: headers,
+          body: body,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили обновление Car');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить обновление Car');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: body,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.put);
+        log('сохранили обновление Car');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future deleteCar({
+    required int id,
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/car/$id');
+    return retry(
+      () async {
+        final response = await _client.delete(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили удаление Car');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить удаление Car');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.delete);
+        log('сохранили удаление Car');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  
 
   // MARK: - Pending requests
   Future sendPendingRequests(PendingRequest request) async {

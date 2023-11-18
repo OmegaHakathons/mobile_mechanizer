@@ -6,7 +6,7 @@ part of 'aggregate.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CarAdapter extends TypeAdapter<_$AggregateImpl> {
+class AggregateAdapter extends TypeAdapter<_$AggregateImpl> {
   @override
   final int typeId = 24;
 
@@ -41,7 +41,7 @@ class CarAdapter extends TypeAdapter<_$AggregateImpl> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CarAdapter &&
+      other is AggregateAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
