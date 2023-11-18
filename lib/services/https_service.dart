@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:agro_mech/models/task/aggregate.dart';
 import 'package:agro_mech/models/task/car.dart';
 import 'package:agro_mech/models/task/task.dart';
 import 'package:http/http.dart';
@@ -849,7 +850,224 @@ class HttpsService {
     });
   }
 
+  // MARK: - Aggregate
+  Future getAggregates() async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/aggregate');
+    return retry(
+      () async {
+        final response = await _client.get(url, headers: headers);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('получение Aggregates');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить Aggregates');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили Aggregates на потом');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
   
+  Future createAggregate({required Aggregate aggregate}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final body = json.encode(aggregate);
+    final url = Uri.https(_baseUrl, '$_api/aggregate');
+    return retry(
+      () async {
+        final response = await _client.post(
+          url,
+          headers: headers,
+          body: body,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили создание Aggregate');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить создание Aggregate');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: body,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.post);
+        log('сохранили создание Aggregate');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future getAggregate({required int id}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    // final body = json.encode(jsonEncode(task));
+    final url = Uri.https(_baseUrl, '$_api/aggregate/$id');
+    return retry(
+      () async {
+        final response = await _client.get(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили получение Aggregate');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить получение Aggregate');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили получение Aggregate');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future updateAggregate({
+    required int id,
+    required Task task
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final body = json.encode(task);
+    final url = Uri.https(_baseUrl, '$_api/aggregate/$id');
+    return retry(
+      () async {
+        final response = await _client.put(
+          url,
+          headers: headers,
+          body: body,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили обновление Aggregate');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить обновление Aggregate');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: body,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.put);
+        log('сохранили обновление Aggregate');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future deleteCar({
+    required int id,
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/car/$id');
+    return retry(
+      () async {
+        final response = await _client.delete(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили удаление Car');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить удаление Car');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.delete);
+        log('сохранили удаление Car');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+
 
   // MARK: - Pending requests
   Future sendPendingRequests(PendingRequest request) async {
