@@ -6,6 +6,8 @@ import 'package:hive/hive.dart';
 part 'pending_request.freezed.dart';
 part 'pending_request.g.dart';
 
+enum HttpType { get, post, delete, put }
+
 @Freezed()
 class PendingRequest with _$PendingRequest {
 
@@ -14,11 +16,14 @@ class PendingRequest with _$PendingRequest {
         @HiveField(0)
         required String url,
         @HiveField(1)
-        required String body,
+        required String? body,
         @HiveField(2)
         required String headers,
         @HiveField(3)
         required String id,
+        @HiveField(4)
+        required HttpType type,
+
     }) = _PendingRequest;
 
 }

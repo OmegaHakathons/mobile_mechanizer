@@ -14,12 +14,23 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Car _$CarFromJson(Map<String, dynamic> json) {
+  return _Car.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Car {
+  @JsonKey(name: 'id')
+  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'number')
+  @HiveField(2)
   String get number => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CarCopyWith<Car> get copyWith => throw _privateConstructorUsedError;
 }
@@ -29,7 +40,10 @@ abstract class $CarCopyWith<$Res> {
   factory $CarCopyWith(Car value, $Res Function(Car) then) =
       _$CarCopyWithImpl<$Res, Car>;
   @useResult
-  $Res call({int id, String name, String number});
+  $Res call(
+      {@JsonKey(name: 'id') @HiveField(0) int id,
+      @JsonKey(name: 'name') @HiveField(1) String name,
+      @JsonKey(name: 'number') @HiveField(2) String number});
 }
 
 /// @nodoc
@@ -71,7 +85,10 @@ abstract class _$$CarImplCopyWith<$Res> implements $CarCopyWith<$Res> {
       __$$CarImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String number});
+  $Res call(
+      {@JsonKey(name: 'id') @HiveField(0) int id,
+      @JsonKey(name: 'name') @HiveField(1) String name,
+      @JsonKey(name: 'number') @HiveField(2) String number});
 }
 
 /// @nodoc
@@ -105,15 +122,28 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
 }
 
 /// @nodoc
-
+@JsonSerializable()
+@HiveType(typeId: 22, adapterName: 'CarAdapter')
 class _$CarImpl implements _Car {
-  const _$CarImpl({required this.id, required this.name, required this.number});
+  const _$CarImpl(
+      {@JsonKey(name: 'id') @HiveField(0) required this.id,
+      @JsonKey(name: 'name') @HiveField(1) required this.name,
+      @JsonKey(name: 'number') @HiveField(2) required this.number});
+
+  factory _$CarImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CarImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
+  @HiveField(0)
   final int id;
   @override
+  @JsonKey(name: 'name')
+  @HiveField(1)
   final String name;
   @override
+  @JsonKey(name: 'number')
+  @HiveField(2)
   final String number;
 
   @override
@@ -131,6 +161,7 @@ class _$CarImpl implements _Car {
             (identical(other.number, number) || other.number == number));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, number);
 
@@ -139,19 +170,36 @@ class _$CarImpl implements _Car {
   @pragma('vm:prefer-inline')
   _$$CarImplCopyWith<_$CarImpl> get copyWith =>
       __$$CarImplCopyWithImpl<_$CarImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CarImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Car implements Car {
   const factory _Car(
-      {required final int id,
-      required final String name,
+      {@JsonKey(name: 'id') @HiveField(0) required final int id,
+      @JsonKey(name: 'name') @HiveField(1) required final String name,
+      @JsonKey(name: 'number')
+      @HiveField(2)
       required final String number}) = _$CarImpl;
 
+  factory _Car.fromJson(Map<String, dynamic> json) = _$CarImpl.fromJson;
+
   @override
+  @JsonKey(name: 'id')
+  @HiveField(0)
   int get id;
   @override
+  @JsonKey(name: 'name')
+  @HiveField(1)
   String get name;
   @override
+  @JsonKey(name: 'number')
+  @HiveField(2)
   String get number;
   @override
   @JsonKey(ignore: true)

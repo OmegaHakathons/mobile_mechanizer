@@ -19,11 +19,13 @@ mixin _$PendingRequest {
   @HiveField(0)
   String get url => throw _privateConstructorUsedError;
   @HiveField(1)
-  String get body => throw _privateConstructorUsedError;
+  String? get body => throw _privateConstructorUsedError;
   @HiveField(2)
   String get headers => throw _privateConstructorUsedError;
   @HiveField(3)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(4)
+  HttpType get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PendingRequestCopyWith<PendingRequest> get copyWith =>
@@ -38,9 +40,10 @@ abstract class $PendingRequestCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) String url,
-      @HiveField(1) String body,
+      @HiveField(1) String? body,
       @HiveField(2) String headers,
-      @HiveField(3) String id});
+      @HiveField(3) String id,
+      @HiveField(4) HttpType type});
 }
 
 /// @nodoc
@@ -57,19 +60,20 @@ class _$PendingRequestCopyWithImpl<$Res, $Val extends PendingRequest>
   @override
   $Res call({
     Object? url = null,
-    Object? body = null,
+    Object? body = freezed,
     Object? headers = null,
     Object? id = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      body: null == body
+      body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       headers: null == headers
           ? _value.headers
           : headers // ignore: cast_nullable_to_non_nullable
@@ -78,6 +82,10 @@ class _$PendingRequestCopyWithImpl<$Res, $Val extends PendingRequest>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as HttpType,
     ) as $Val);
   }
 }
@@ -92,9 +100,10 @@ abstract class _$$PendingRequestImplCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0) String url,
-      @HiveField(1) String body,
+      @HiveField(1) String? body,
       @HiveField(2) String headers,
-      @HiveField(3) String id});
+      @HiveField(3) String id,
+      @HiveField(4) HttpType type});
 }
 
 /// @nodoc
@@ -109,19 +118,20 @@ class __$$PendingRequestImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? url = null,
-    Object? body = null,
+    Object? body = freezed,
     Object? headers = null,
     Object? id = null,
+    Object? type = null,
   }) {
     return _then(_$PendingRequestImpl(
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-      body: null == body
+      body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       headers: null == headers
           ? _value.headers
           : headers // ignore: cast_nullable_to_non_nullable
@@ -130,6 +140,10 @@ class __$$PendingRequestImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as HttpType,
     ));
   }
 }
@@ -144,24 +158,28 @@ class _$PendingRequestImpl
       {@HiveField(0) required this.url,
       @HiveField(1) required this.body,
       @HiveField(2) required this.headers,
-      @HiveField(3) required this.id});
+      @HiveField(3) required this.id,
+      @HiveField(4) required this.type});
 
   @override
   @HiveField(0)
   final String url;
   @override
   @HiveField(1)
-  final String body;
+  final String? body;
   @override
   @HiveField(2)
   final String headers;
   @override
   @HiveField(3)
   final String id;
+  @override
+  @HiveField(4)
+  final HttpType type;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PendingRequest(url: $url, body: $body, headers: $headers, id: $id)';
+    return 'PendingRequest(url: $url, body: $body, headers: $headers, id: $id, type: $type)';
   }
 
   @override
@@ -172,7 +190,8 @@ class _$PendingRequestImpl
       ..add(DiagnosticsProperty('url', url))
       ..add(DiagnosticsProperty('body', body))
       ..add(DiagnosticsProperty('headers', headers))
-      ..add(DiagnosticsProperty('id', id));
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('type', type));
   }
 
   @override
@@ -183,11 +202,12 @@ class _$PendingRequestImpl
             (identical(other.url, url) || other.url == url) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.headers, headers) || other.headers == headers) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, url, body, headers, id);
+  int get hashCode => Object.hash(runtimeType, url, body, headers, id, type);
 
   @JsonKey(ignore: true)
   @override
@@ -200,22 +220,26 @@ class _$PendingRequestImpl
 abstract class _PendingRequest implements PendingRequest {
   const factory _PendingRequest(
       {@HiveField(0) required final String url,
-      @HiveField(1) required final String body,
+      @HiveField(1) required final String? body,
       @HiveField(2) required final String headers,
-      @HiveField(3) required final String id}) = _$PendingRequestImpl;
+      @HiveField(3) required final String id,
+      @HiveField(4) required final HttpType type}) = _$PendingRequestImpl;
 
   @override
   @HiveField(0)
   String get url;
   @override
   @HiveField(1)
-  String get body;
+  String? get body;
   @override
   @HiveField(2)
   String get headers;
   @override
   @HiveField(3)
   String get id;
+  @override
+  @HiveField(4)
+  HttpType get type;
   @override
   @JsonKey(ignore: true)
   _$$PendingRequestImplCopyWith<_$PendingRequestImpl> get copyWith =>

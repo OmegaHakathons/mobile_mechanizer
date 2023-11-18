@@ -31,7 +31,7 @@ class Repository {
 
   final _httpService = HttpsService();
   // final _secureStorage = SecureStorageService();
-  // late CardRepository cardRepository;
+  late CardRepository cardRepository;
 
   // void startGettingRegistr() {
   //   _timer = Timer.periodic(const Duration(hours: 1), (timer) async {

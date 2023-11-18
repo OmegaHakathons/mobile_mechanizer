@@ -18,16 +18,17 @@ class PendingRequestAdapter extends TypeAdapter<_$PendingRequestImpl> {
     };
     return _$PendingRequestImpl(
       url: fields[0] as String,
-      body: fields[1] as String,
+      body: fields[1] as String?,
       headers: fields[2] as String,
       id: fields[3] as String,
+      type: fields[4] as HttpType,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$PendingRequestImpl obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.url)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class PendingRequestAdapter extends TypeAdapter<_$PendingRequestImpl> {
       ..writeByte(2)
       ..write(obj.headers)
       ..writeByte(3)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(4)
+      ..write(obj.type);
   }
 
   @override

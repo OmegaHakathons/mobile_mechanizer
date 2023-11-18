@@ -14,12 +14,23 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Aggregate _$AggregateFromJson(Map<String, dynamic> json) {
+  return _Aggregate.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Aggregate {
+  @JsonKey(name: 'id')
+  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'number')
+  @HiveField(2)
   String get number => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AggregateCopyWith<Aggregate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -30,7 +41,10 @@ abstract class $AggregateCopyWith<$Res> {
   factory $AggregateCopyWith(Aggregate value, $Res Function(Aggregate) then) =
       _$AggregateCopyWithImpl<$Res, Aggregate>;
   @useResult
-  $Res call({int id, String name, String number});
+  $Res call(
+      {@JsonKey(name: 'id') @HiveField(0) int id,
+      @JsonKey(name: 'name') @HiveField(1) String name,
+      @JsonKey(name: 'number') @HiveField(2) String number});
 }
 
 /// @nodoc
@@ -75,7 +89,10 @@ abstract class _$$AggregateImplCopyWith<$Res>
       __$$AggregateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String number});
+  $Res call(
+      {@JsonKey(name: 'id') @HiveField(0) int id,
+      @JsonKey(name: 'name') @HiveField(1) String name,
+      @JsonKey(name: 'number') @HiveField(2) String number});
 }
 
 /// @nodoc
@@ -111,16 +128,28 @@ class __$$AggregateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
+@HiveType(typeId: 24, adapterName: 'CarAdapter')
 class _$AggregateImpl implements _Aggregate {
   const _$AggregateImpl(
-      {required this.id, required this.name, required this.number});
+      {@JsonKey(name: 'id') @HiveField(0) required this.id,
+      @JsonKey(name: 'name') @HiveField(1) required this.name,
+      @JsonKey(name: 'number') @HiveField(2) required this.number});
+
+  factory _$AggregateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AggregateImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
+  @HiveField(0)
   final int id;
   @override
+  @JsonKey(name: 'name')
+  @HiveField(1)
   final String name;
   @override
+  @JsonKey(name: 'number')
+  @HiveField(2)
   final String number;
 
   @override
@@ -138,6 +167,7 @@ class _$AggregateImpl implements _Aggregate {
             (identical(other.number, number) || other.number == number));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, number);
 
@@ -146,19 +176,37 @@ class _$AggregateImpl implements _Aggregate {
   @pragma('vm:prefer-inline')
   _$$AggregateImplCopyWith<_$AggregateImpl> get copyWith =>
       __$$AggregateImplCopyWithImpl<_$AggregateImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AggregateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Aggregate implements Aggregate {
   const factory _Aggregate(
-      {required final int id,
-      required final String name,
+      {@JsonKey(name: 'id') @HiveField(0) required final int id,
+      @JsonKey(name: 'name') @HiveField(1) required final String name,
+      @JsonKey(name: 'number')
+      @HiveField(2)
       required final String number}) = _$AggregateImpl;
 
+  factory _Aggregate.fromJson(Map<String, dynamic> json) =
+      _$AggregateImpl.fromJson;
+
   @override
+  @JsonKey(name: 'id')
+  @HiveField(0)
   int get id;
   @override
+  @JsonKey(name: 'name')
+  @HiveField(1)
   String get name;
   @override
+  @JsonKey(name: 'number')
+  @HiveField(2)
   String get number;
   @override
   @JsonKey(ignore: true)

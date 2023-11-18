@@ -19,20 +19,20 @@ class CardCubit extends Cubit<CardState> {
         super(CardInitial());
 
   final CardRepository _cardRepository;
-  Future<CardEkzh?> getCardByNumber(int cardNumber) async {
-    return await _cardRepository.getCardByNumber(cardNumber);
-  }
+  // Future<CardEkzh?> getCardByNumber(int cardNumber) async {
+  //   return await _cardRepository.getCardByNumber(cardNumber);
+  // }
 
   Future<void> getCards() async {
     try {
       emit(CardLoading());
       final hasConnected = await InternetConnectionChecker().hasConnection;
       if (hasConnected) {
-        final serverResponse = await _cardRepository.getCards();
+        // final serverResponse = await _cardRepository.getCards();
 
-        await _cardRepository.saveCardsLocally(cards: serverResponse);
+        // await _cardRepository.saveCardsLocally(cards: serverResponse);
 
-        emit(CardLoaded(response: serverResponse));
+        // emit(CardLoaded(response: serverResponse));
       } else {
         final localCards = await _cardRepository.fetchAllLocalCards();
         log(localCards.length);

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:agro_mech/models/task/task.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'entities/card_ekzh.dart';
@@ -16,58 +17,59 @@ Future<CardRepository> initialiseHive() async {
   //adapters
   Hive.registerAdapter(CardAdapter());
   Hive.registerAdapter(TariffAdapter());
+  Hive.registerAdapter(TaskAdapter());
 
   //box
-  final cardsBox = await Hive.openBox<CardEkzh?>(cardKey);
+  final box = await Hive.openBox<Task?>(cardKey);
   //repos
-  return CardRepository(cardBox: cardsBox);
+  return CardRepository(cardBox: box);
 }
 
 // }
 
 class CardRepository {
-  CardRepository({required Box<CardEkzh?> cardBox}) : _cardBox = cardBox;
+  CardRepository({required Box<Task?> cardBox}) : _cardBox = cardBox;
 
   final _httpsService = HttpsService();
 
-  final Box<CardEkzh?> _cardBox;
+  final Box<Task?> _cardBox;
 
-  Future<List<CardEkzh>> getCards() async {
-    log("получаем последнее время обновления");
-    DateTime? lastUpdate;
-    final gettedTime = await SecureStorageService().getLastupdateDateTime();
-    if (gettedTime != null) {
-      lastUpdate = DateTime.parse(gettedTime);
-    }
-    log('Начали грузить карты');
-    final response = await _httpsService.getRegistr(lastUpdate: lastUpdate);
-    log('Загрузили, количество ${response.registers.length}');
-    await SecureStorageService().saveLastupdateDateTime(response.lastUpdated);
+  // Future<List<CardEkzh>> getCards() async {
+  //   log("получаем последнее время обновления");
+  //   DateTime? lastUpdate;
+  //   final gettedTime = await SecureStorageService().getLastupdateDateTime();
+  //   if (gettedTime != null) {
+  //     lastUpdate = DateTime.parse(gettedTime);
+  //   }
+  //   log('Начали грузить карты');
+  //   final response = await _httpsService.getRegistr(lastUpdate: lastUpdate);
+  //   log('Загрузили, количество ${response.registers.length}');
+  //   await SecureStorageService().saveLastupdateDateTime(response.lastUpdated);
 
-    final cards = response.registers
-        .map(
-            ((e) => CardEkzh.fromRegister(e, response.names, response.tariffs)))
-        .toList();
+  //   final cards = response.registers
+  //       .map(
+  //           ((e) => CardEkzh.fromRegister(e, response.names, response.tariffs)))
+  //       .toList();
 
-    return cards;
-  }
+  //   return cards;
+  // }
 
-  Future addNewCards({required List<CardEkzh> newCards}) async {
+  Future addNewCards({required List<Task> newCards}) async {
     final existanceCards = _cardBox.keys;
-    newCards.removeWhere((e) => existanceCards.contains(e.cardNumber.hashCode));
+    newCards.removeWhere((e) => existanceCards.contains(e.id));
     await saveCardsLocally(cards: newCards);
   }
 
   Future<void> saveCardsLocally({
-    required List<CardEkzh> cards,
+    required List<Task> cards,
   }) async {
     for (final card in cards) {
-      await _cardBox.put(card.cardNumber.hashCode, card);
+      await _cardBox.put(card.id, card);
     }
   }
 
-  Future<CardEkzh?> getCardByNumber(int cardNumber) async {
-    return _cardBox.get(cardNumber.hashCode);
+  Future<Task?> getCardByNumber(int id) async {
+    return _cardBox.get(id);
   }
 
   Future fetchAllLocalCards() async {

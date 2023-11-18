@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:agro_mech/models/task/task.dart';
 import 'package:http/http.dart';
 import 'package:retry/retry.dart';
 import 'package:uuid/uuid.dart';
@@ -414,6 +415,222 @@ class HttpsService {
 //     );
 //   }
 
+  Future getTasks() async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/task');
+    return retry(
+      () async {
+        final response = await _client.get(url, headers: headers);
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('получение тасок');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить task');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили таску на потом');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+  
+  Future createTasks({required Task task}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final body = json.encode(task);
+    final url = Uri.https(_baseUrl, '$_api/task');
+    return retry(
+      () async {
+        final response = await _client.post(
+          url,
+          headers: headers,
+          body: body,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили создание таски');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить создание таски');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: body,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.post);
+        log('сохранили создание таски');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future getTask({required int id}) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    // final body = json.encode(jsonEncode(task));
+    final url = Uri.https(_baseUrl, '$_api/task/$id');
+    return retry(
+      () async {
+        final response = await _client.get(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили получение таски');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить получение таски');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.get);
+        log('сохранили получение таски');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future updateTask({
+    required int id,
+    required Task task
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final body = json.encode(task);
+    final url = Uri.https(_baseUrl, '$_api/task/$id');
+    return retry(
+      () async {
+        final response = await _client.put(
+          url,
+          headers: headers,
+          body: body,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили обновление таски');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить обновление таски');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: body,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.put);
+        log('сохранили обновление таски');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
+  Future deleteTask({
+    required int id,
+    }) async {
+    final token = await _tokenService.getToken();
+    if (token == null) {
+      throw Exception("There is no token");
+    }
+    // Map request = {"request_at": DateTime.now().toUtc().toString()};
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $token",
+    };
+    final url = Uri.https(_baseUrl, '$_api/task/$id');
+    return retry(
+      () async {
+        final response = await _client.delete(
+          url,
+          headers: headers,
+        );
+        if (response.statusCode == 200 || response.statusCode == 201) {
+          var value = jsonDecode(response.body);
+          log('отправили удаление таски');
+          return value;
+        } else {
+          throw Exception("Failed to logIn");
+        }
+      },
+      maxAttempts: 3,
+      retryIf: (e) => e is TimeoutException,
+    ).onError((e, _) async {
+      if (e is TimeoutException || e is SocketException) {
+        log('не получилось отправить удаление таски');
+        final request = PendingRequest(
+            url: url.toString(),
+            body: null,
+            headers: json.encode(headers),
+            id: const Uuid().v4().toString(),
+            type: HttpType.delete);
+        log('сохранили удаление таски');
+        return await Repository().savePendingRequest(request);
+      }
+    });
+  }
+
   // MARK: - Pending requests
   Future sendPendingRequests(PendingRequest request) async {
     final body = request.body;
@@ -424,12 +641,22 @@ class HttpsService {
 
     return retry(
       () async {
-        final response = await _client.post(
-          url,
-          headers: finalHeaders,
-          body: body,
-        );
-        if (response.statusCode == 200) {
+        dynamic response;
+        switch (request.type) {
+          case HttpType.get: 
+            response = await _client.get(url, headers: finalHeaders);
+            break;
+          case HttpType.post: 
+            response = await _client.post(url, headers: finalHeaders, body: body);
+            break;
+          case HttpType.delete: 
+            response = await _client.delete(url, headers: finalHeaders, body: body);
+            break;
+          case HttpType.put: 
+            response = await _client.put(url, headers: finalHeaders, body: body);
+            break;
+        }
+        if (response.statusCode == 200 || response.statusCode == 201) {
           var value = jsonDecode(response.body);
           await Repository().flushPendingRequest(request);
           return value;

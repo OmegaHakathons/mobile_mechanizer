@@ -18,7 +18,7 @@ class AppCubit extends Cubit<AppState> {
   ) : super(const AppState());
 
   final ReachabilityService interbetRepo;
-  // final Repository repository;
+  final Repository repository = Repository();
 
   void updateTab(AppTabs newTab) {
     emit(state.copyWith(currentTab: newTab));
@@ -35,7 +35,7 @@ class AppCubit extends Cubit<AppState> {
   Future<void> listenToConnectivity() async {
     interbetRepo.onStatusChange.listen((result) {
       if (result == InternetStatus.connected) {
-        // repository.sendPendingRequests();
+        repository.sendPendingRequests();
         emit(state.copyWith(isConnection: true));
       } else {
         emit(state.copyWith(isConnection: false));
@@ -48,6 +48,7 @@ class AppCubit extends Cubit<AppState> {
       log('Начали авторизовываться');
       final result = await HttpsService()
           .auth(email: login, pass: password);
+          final rresult = await HttpsService().getTasks();
       log('Авторизовались');
       emit(state.copyWith(isAuthorized: true));
       return result;

@@ -14,14 +14,29 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+StepCustom _$StepCustomFromJson(Map<String, dynamic> json) {
+  return _StepCustom.fromJson(json);
+}
+
 /// @nodoc
 mixin _$StepCustom {
+  @JsonKey(name: 'index')
+  @HiveField(0)
   int get index => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'description')
+  @HiveField(2)
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  @HiveField(3)
   StatusStep get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'comment')
+  @HiveField(4)
   String? get comment => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $StepCustomCopyWith<StepCustom> get copyWith =>
       throw _privateConstructorUsedError;
@@ -34,11 +49,11 @@ abstract class $StepCustomCopyWith<$Res> {
       _$StepCustomCopyWithImpl<$Res, StepCustom>;
   @useResult
   $Res call(
-      {int index,
-      String name,
-      String description,
-      StatusStep status,
-      String? comment});
+      {@JsonKey(name: 'index') @HiveField(0) int index,
+      @JsonKey(name: 'name') @HiveField(1) String name,
+      @JsonKey(name: 'description') @HiveField(2) String description,
+      @JsonKey(name: 'status') @HiveField(3) StatusStep status,
+      @JsonKey(name: 'comment') @HiveField(4) String? comment});
 }
 
 /// @nodoc
@@ -94,11 +109,11 @@ abstract class _$$StepCustomImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int index,
-      String name,
-      String description,
-      StatusStep status,
-      String? comment});
+      {@JsonKey(name: 'index') @HiveField(0) int index,
+      @JsonKey(name: 'name') @HiveField(1) String name,
+      @JsonKey(name: 'description') @HiveField(2) String description,
+      @JsonKey(name: 'status') @HiveField(3) StatusStep status,
+      @JsonKey(name: 'comment') @HiveField(4) String? comment});
 }
 
 /// @nodoc
@@ -144,24 +159,38 @@ class __$$StepCustomImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
+@HiveType(typeId: 23, adapterName: 'StepCustomAdapter')
 class _$StepCustomImpl implements _StepCustom {
   const _$StepCustomImpl(
-      {required this.index,
-      required this.name,
-      required this.description,
-      required this.status,
-      this.comment});
+      {@JsonKey(name: 'index') @HiveField(0) required this.index,
+      @JsonKey(name: 'name') @HiveField(1) required this.name,
+      @JsonKey(name: 'description') @HiveField(2) required this.description,
+      @JsonKey(name: 'status') @HiveField(3) required this.status,
+      @JsonKey(name: 'comment') @HiveField(4) this.comment});
+
+  factory _$StepCustomImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StepCustomImplFromJson(json);
 
   @override
+  @JsonKey(name: 'index')
+  @HiveField(0)
   final int index;
   @override
+  @JsonKey(name: 'name')
+  @HiveField(1)
   final String name;
   @override
+  @JsonKey(name: 'description')
+  @HiveField(2)
   final String description;
   @override
+  @JsonKey(name: 'status')
+  @HiveField(3)
   final StatusStep status;
   @override
+  @JsonKey(name: 'comment')
+  @HiveField(4)
   final String? comment;
 
   @override
@@ -182,6 +211,7 @@ class _$StepCustomImpl implements _StepCustom {
             (identical(other.comment, comment) || other.comment == comment));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode =>
       Object.hash(runtimeType, index, name, description, status, comment);
@@ -191,25 +221,49 @@ class _$StepCustomImpl implements _StepCustom {
   @pragma('vm:prefer-inline')
   _$$StepCustomImplCopyWith<_$StepCustomImpl> get copyWith =>
       __$$StepCustomImplCopyWithImpl<_$StepCustomImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$StepCustomImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _StepCustom implements StepCustom {
   const factory _StepCustom(
-      {required final int index,
-      required final String name,
+      {@JsonKey(name: 'index') @HiveField(0) required final int index,
+      @JsonKey(name: 'name') @HiveField(1) required final String name,
+      @JsonKey(name: 'description')
+      @HiveField(2)
       required final String description,
-      required final StatusStep status,
+      @JsonKey(name: 'status') @HiveField(3) required final StatusStep status,
+      @JsonKey(name: 'comment')
+      @HiveField(4)
       final String? comment}) = _$StepCustomImpl;
 
+  factory _StepCustom.fromJson(Map<String, dynamic> json) =
+      _$StepCustomImpl.fromJson;
+
   @override
+  @JsonKey(name: 'index')
+  @HiveField(0)
   int get index;
   @override
+  @JsonKey(name: 'name')
+  @HiveField(1)
   String get name;
   @override
+  @JsonKey(name: 'description')
+  @HiveField(2)
   String get description;
   @override
+  @JsonKey(name: 'status')
+  @HiveField(3)
   StatusStep get status;
   @override
+  @JsonKey(name: 'comment')
+  @HiveField(4)
   String? get comment;
   @override
   @JsonKey(ignore: true)

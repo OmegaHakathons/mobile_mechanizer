@@ -14,28 +14,67 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Task _$TaskFromJson(Map<String, dynamic> json) {
+  return _Task.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Task {
+  @JsonKey(name: 'id')
+  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'type')
+  @HiveField(1)
   TypeTask get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shortDescription')
+  @HiveField(2)
   String get shortDescription => throw _privateConstructorUsedError;
+  @JsonKey(name: 'steps')
+  @HiveField(3)
   List<StepCustom> get steps => throw _privateConstructorUsedError;
+  @JsonKey(name: 'currentStep')
+  @HiveField(4)
   int? get currentStep => throw _privateConstructorUsedError;
+  @JsonKey(name: 'car')
+  @HiveField(5)
   Car get car => throw _privateConstructorUsedError;
+  @JsonKey(name: 'aggregate')
+  @HiveField(6)
   Aggregate get aggregate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'field')
+  @HiveField(7)
   String get field =>
       throw _privateConstructorUsedError; // пока просто, в будущем класс с местоположением
+  @JsonKey(name: 'minSpeed')
+  @HiveField(8)
   int get minSpeed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'maxSpeed')
+  @HiveField(9)
   int get maxSpeed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'depth')
+  @HiveField(10)
   int? get depth => throw _privateConstructorUsedError;
+  @JsonKey(name: 'material')
+  @HiveField(11)
   String? get material => throw _privateConstructorUsedError;
+  @JsonKey(name: 'consumption')
+  @HiveField(12)
   int? get consumption => throw _privateConstructorUsedError;
+  @JsonKey(name: 'deadline')
+  @HiveField(13)
   DateTime get deadline => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  @HiveField(14)
   StatusTask get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'executor')
+  @HiveField(15)
   String get executor =>
       throw _privateConstructorUsedError; // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+  @JsonKey(name: 'money')
+  @HiveField(16)
   int? get money => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
 }
@@ -46,23 +85,23 @@ abstract class $TaskCopyWith<$Res> {
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
   $Res call(
-      {int id,
-      TypeTask type,
-      String shortDescription,
-      List<StepCustom> steps,
-      int? currentStep,
-      Car car,
-      Aggregate aggregate,
-      String field,
-      int minSpeed,
-      int maxSpeed,
-      int? depth,
-      String? material,
-      int? consumption,
-      DateTime deadline,
-      StatusTask status,
-      String executor,
-      int? money});
+      {@JsonKey(name: 'id') @HiveField(0) int id,
+      @JsonKey(name: 'type') @HiveField(1) TypeTask type,
+      @JsonKey(name: 'shortDescription') @HiveField(2) String shortDescription,
+      @JsonKey(name: 'steps') @HiveField(3) List<StepCustom> steps,
+      @JsonKey(name: 'currentStep') @HiveField(4) int? currentStep,
+      @JsonKey(name: 'car') @HiveField(5) Car car,
+      @JsonKey(name: 'aggregate') @HiveField(6) Aggregate aggregate,
+      @JsonKey(name: 'field') @HiveField(7) String field,
+      @JsonKey(name: 'minSpeed') @HiveField(8) int minSpeed,
+      @JsonKey(name: 'maxSpeed') @HiveField(9) int maxSpeed,
+      @JsonKey(name: 'depth') @HiveField(10) int? depth,
+      @JsonKey(name: 'material') @HiveField(11) String? material,
+      @JsonKey(name: 'consumption') @HiveField(12) int? consumption,
+      @JsonKey(name: 'deadline') @HiveField(13) DateTime deadline,
+      @JsonKey(name: 'status') @HiveField(14) StatusTask status,
+      @JsonKey(name: 'executor') @HiveField(15) String executor,
+      @JsonKey(name: 'money') @HiveField(16) int? money});
 
   $CarCopyWith<$Res> get car;
   $AggregateCopyWith<$Res> get aggregate;
@@ -196,23 +235,23 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      TypeTask type,
-      String shortDescription,
-      List<StepCustom> steps,
-      int? currentStep,
-      Car car,
-      Aggregate aggregate,
-      String field,
-      int minSpeed,
-      int maxSpeed,
-      int? depth,
-      String? material,
-      int? consumption,
-      DateTime deadline,
-      StatusTask status,
-      String executor,
-      int? money});
+      {@JsonKey(name: 'id') @HiveField(0) int id,
+      @JsonKey(name: 'type') @HiveField(1) TypeTask type,
+      @JsonKey(name: 'shortDescription') @HiveField(2) String shortDescription,
+      @JsonKey(name: 'steps') @HiveField(3) List<StepCustom> steps,
+      @JsonKey(name: 'currentStep') @HiveField(4) int? currentStep,
+      @JsonKey(name: 'car') @HiveField(5) Car car,
+      @JsonKey(name: 'aggregate') @HiveField(6) Aggregate aggregate,
+      @JsonKey(name: 'field') @HiveField(7) String field,
+      @JsonKey(name: 'minSpeed') @HiveField(8) int minSpeed,
+      @JsonKey(name: 'maxSpeed') @HiveField(9) int maxSpeed,
+      @JsonKey(name: 'depth') @HiveField(10) int? depth,
+      @JsonKey(name: 'material') @HiveField(11) String? material,
+      @JsonKey(name: 'consumption') @HiveField(12) int? consumption,
+      @JsonKey(name: 'deadline') @HiveField(13) DateTime deadline,
+      @JsonKey(name: 'status') @HiveField(14) StatusTask status,
+      @JsonKey(name: 'executor') @HiveField(15) String executor,
+      @JsonKey(name: 'money') @HiveField(16) int? money});
 
   @override
   $CarCopyWith<$Res> get car;
@@ -322,36 +361,52 @@ class __$$TaskImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
+@HiveType(typeId: 21, adapterName: 'TaskAdapter')
 class _$TaskImpl implements _Task {
   const _$TaskImpl(
-      {required this.id,
-      required this.type,
+      {@JsonKey(name: 'id') @HiveField(0) required this.id,
+      @JsonKey(name: 'type') @HiveField(1) required this.type,
+      @JsonKey(name: 'shortDescription')
+      @HiveField(2)
       required this.shortDescription,
+      @JsonKey(name: 'steps')
+      @HiveField(3)
       required final List<StepCustom> steps,
-      this.currentStep,
-      required this.car,
-      required this.aggregate,
-      required this.field,
-      required this.minSpeed,
-      required this.maxSpeed,
-      this.depth,
-      this.material,
-      this.consumption,
-      required this.deadline,
-      required this.status,
-      required this.executor,
-      this.money})
+      @JsonKey(name: 'currentStep') @HiveField(4) this.currentStep,
+      @JsonKey(name: 'car') @HiveField(5) required this.car,
+      @JsonKey(name: 'aggregate') @HiveField(6) required this.aggregate,
+      @JsonKey(name: 'field') @HiveField(7) required this.field,
+      @JsonKey(name: 'minSpeed') @HiveField(8) required this.minSpeed,
+      @JsonKey(name: 'maxSpeed') @HiveField(9) required this.maxSpeed,
+      @JsonKey(name: 'depth') @HiveField(10) this.depth,
+      @JsonKey(name: 'material') @HiveField(11) this.material,
+      @JsonKey(name: 'consumption') @HiveField(12) this.consumption,
+      @JsonKey(name: 'deadline') @HiveField(13) required this.deadline,
+      @JsonKey(name: 'status') @HiveField(14) required this.status,
+      @JsonKey(name: 'executor') @HiveField(15) required this.executor,
+      @JsonKey(name: 'money') @HiveField(16) this.money})
       : _steps = steps;
 
+  factory _$TaskImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TaskImplFromJson(json);
+
   @override
+  @JsonKey(name: 'id')
+  @HiveField(0)
   final int id;
   @override
+  @JsonKey(name: 'type')
+  @HiveField(1)
   final TypeTask type;
   @override
+  @JsonKey(name: 'shortDescription')
+  @HiveField(2)
   final String shortDescription;
   final List<StepCustom> _steps;
   @override
+  @JsonKey(name: 'steps')
+  @HiveField(3)
   List<StepCustom> get steps {
     if (_steps is EqualUnmodifiableListView) return _steps;
     // ignore: implicit_dynamic_type
@@ -359,32 +414,58 @@ class _$TaskImpl implements _Task {
   }
 
   @override
+  @JsonKey(name: 'currentStep')
+  @HiveField(4)
   final int? currentStep;
   @override
+  @JsonKey(name: 'car')
+  @HiveField(5)
   final Car car;
   @override
+  @JsonKey(name: 'aggregate')
+  @HiveField(6)
   final Aggregate aggregate;
   @override
+  @JsonKey(name: 'field')
+  @HiveField(7)
   final String field;
 // пока просто, в будущем класс с местоположением
   @override
+  @JsonKey(name: 'minSpeed')
+  @HiveField(8)
   final int minSpeed;
   @override
+  @JsonKey(name: 'maxSpeed')
+  @HiveField(9)
   final int maxSpeed;
   @override
+  @JsonKey(name: 'depth')
+  @HiveField(10)
   final int? depth;
   @override
+  @JsonKey(name: 'material')
+  @HiveField(11)
   final String? material;
   @override
+  @JsonKey(name: 'consumption')
+  @HiveField(12)
   final int? consumption;
   @override
+  @JsonKey(name: 'deadline')
+  @HiveField(13)
   final DateTime deadline;
   @override
+  @JsonKey(name: 'status')
+  @HiveField(14)
   final StatusTask status;
   @override
+  @JsonKey(name: 'executor')
+  @HiveField(15)
   final String executor;
 // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
   @override
+  @JsonKey(name: 'money')
+  @HiveField(16)
   final int? money;
 
   @override
@@ -425,6 +506,7 @@ class _$TaskImpl implements _Task {
             (identical(other.money, money) || other.money == money));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -451,61 +533,112 @@ class _$TaskImpl implements _Task {
   @pragma('vm:prefer-inline')
   _$$TaskImplCopyWith<_$TaskImpl> get copyWith =>
       __$$TaskImplCopyWithImpl<_$TaskImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TaskImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Task implements Task {
   const factory _Task(
-      {required final int id,
-      required final TypeTask type,
+      {@JsonKey(name: 'id') @HiveField(0) required final int id,
+      @JsonKey(name: 'type') @HiveField(1) required final TypeTask type,
+      @JsonKey(name: 'shortDescription')
+      @HiveField(2)
       required final String shortDescription,
+      @JsonKey(name: 'steps')
+      @HiveField(3)
       required final List<StepCustom> steps,
-      final int? currentStep,
-      required final Car car,
+      @JsonKey(name: 'currentStep') @HiveField(4) final int? currentStep,
+      @JsonKey(name: 'car') @HiveField(5) required final Car car,
+      @JsonKey(name: 'aggregate')
+      @HiveField(6)
       required final Aggregate aggregate,
-      required final String field,
-      required final int minSpeed,
-      required final int maxSpeed,
-      final int? depth,
-      final String? material,
-      final int? consumption,
+      @JsonKey(name: 'field') @HiveField(7) required final String field,
+      @JsonKey(name: 'minSpeed') @HiveField(8) required final int minSpeed,
+      @JsonKey(name: 'maxSpeed') @HiveField(9) required final int maxSpeed,
+      @JsonKey(name: 'depth') @HiveField(10) final int? depth,
+      @JsonKey(name: 'material') @HiveField(11) final String? material,
+      @JsonKey(name: 'consumption') @HiveField(12) final int? consumption,
+      @JsonKey(name: 'deadline')
+      @HiveField(13)
       required final DateTime deadline,
-      required final StatusTask status,
-      required final String executor,
-      final int? money}) = _$TaskImpl;
+      @JsonKey(name: 'status') @HiveField(14) required final StatusTask status,
+      @JsonKey(name: 'executor') @HiveField(15) required final String executor,
+      @JsonKey(name: 'money') @HiveField(16) final int? money}) = _$TaskImpl;
+
+  factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
+  @HiveField(0)
   int get id;
   @override
+  @JsonKey(name: 'type')
+  @HiveField(1)
   TypeTask get type;
   @override
+  @JsonKey(name: 'shortDescription')
+  @HiveField(2)
   String get shortDescription;
   @override
+  @JsonKey(name: 'steps')
+  @HiveField(3)
   List<StepCustom> get steps;
   @override
+  @JsonKey(name: 'currentStep')
+  @HiveField(4)
   int? get currentStep;
   @override
+  @JsonKey(name: 'car')
+  @HiveField(5)
   Car get car;
   @override
+  @JsonKey(name: 'aggregate')
+  @HiveField(6)
   Aggregate get aggregate;
   @override
+  @JsonKey(name: 'field')
+  @HiveField(7)
   String get field;
   @override // пока просто, в будущем класс с местоположением
+  @JsonKey(name: 'minSpeed')
+  @HiveField(8)
   int get minSpeed;
   @override
+  @JsonKey(name: 'maxSpeed')
+  @HiveField(9)
   int get maxSpeed;
   @override
+  @JsonKey(name: 'depth')
+  @HiveField(10)
   int? get depth;
   @override
+  @JsonKey(name: 'material')
+  @HiveField(11)
   String? get material;
   @override
+  @JsonKey(name: 'consumption')
+  @HiveField(12)
   int? get consumption;
   @override
+  @JsonKey(name: 'deadline')
+  @HiveField(13)
   DateTime get deadline;
   @override
+  @JsonKey(name: 'status')
+  @HiveField(14)
   StatusTask get status;
   @override
+  @JsonKey(name: 'executor')
+  @HiveField(15)
   String get executor;
   @override // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+  @JsonKey(name: 'money')
+  @HiveField(16)
   int? get money;
   @override
   @JsonKey(ignore: true)

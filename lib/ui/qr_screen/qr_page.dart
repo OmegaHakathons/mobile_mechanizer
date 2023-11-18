@@ -62,10 +62,10 @@ class _QrPageState extends State<QrPage> {
         result = scanData;
 
         controller.pauseCamera();
-        final card = await BlocProvider.of<CardCubit>(context)
-            .getCardByNumber(2200100000000002);
-        log(card.toString());
-        context.pushNamed(RouteName.passenger, extra: card);
+        // final card = await BlocProvider.of<CardCubit>(context)
+        //     .getCardByNumber(2200100000000002);
+        // log(card.toString());
+        // context.pushNamed(RouteName.passenger, extra: card);
       });
     });
   }
