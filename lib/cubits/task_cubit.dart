@@ -118,4 +118,44 @@ class TaskCubit extends Cubit<TasksState> {
       ),
     );
   }
+
+  void toggleLook() {
+    emit(
+      state.copyWith(
+        look: !state.look,
+      ),
+    );
+  }
+
+  void toggleTo() {
+    emit(
+      state.copyWith(
+        to: !state.to,
+      ),
+    );
+  }
+
+  void toggleCheck() {
+    emit(
+      state.copyWith(
+        check: !state.check,
+      ),
+    );
+  }
+
+  void toggleSetting() {
+    emit(
+      state.copyWith(
+        setting: !state.setting,
+      ),
+    );
+  }
+
+  void toggleRun() {
+    emit(
+      state.copyWith(
+        run: !state.run,
+      ),
+    );
+  }
 }

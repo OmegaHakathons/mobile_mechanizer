@@ -34,9 +34,9 @@ class CardCubit extends Cubit<CardState> {
 
         // emit(CardLoaded(response: serverResponse));
       } else {
-        final localCards = await _cardRepository.fetchAllLocalCards();
-        log(localCards.length);
-        emit(CardLoaded(response: localCards));
+        // // final localCards = await _cardRepository.fetchAllLocalCards();
+        // log(localCards.length);
+        // emit(CardLoaded(response: localCards));
       }
     } catch (e) {
       emit(CardError(error: e.toString()));

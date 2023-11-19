@@ -22,21 +22,98 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
+    final List<DateTime> dates = context
+        .read<TaskCubit>()
+        .state
+        .tasks
+        .map((e) => getYearMonthDay(e.deadline))
+        .toSet()
+        .toList()
+        .where((element) =>
+            !getYearMonthDay(element).isBefore(getYearMonthDay(DateTime.now())))
+        .toList();
+
+    List<Tab> buildTabs() {
+      return List.generate(
+        dates.length,
+        (index) => Tab(text: DateFormat('E, d', 'ru').format(dates[index])),
+      );
+    }
+
     return SafeArea(
-      child: SingleChildScrollView(
-        child: BlocBuilder<CalendarCubit, CalendarState>(
-          builder: (context, state) {
-            // не делать константой !!! (позже исправлю)
-            return Column(
+      child: DefaultTabController(
+        length: dates.length,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size(double.infinity, 74),
+            child: Row(
               children: [
-                AboutUser(),
-                SizedBox(height: 12),
-                Calendar(),
-                SizedBox(height: 12),
-                DayTaks(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: CircleAvatar(
+                    radius: 25,
+                    backgroundColor: Colors.grey,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Петр Петрович'),
+                      Text(
+                        'Механизатор 1 разряда',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall!
+                            .copyWith(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.notifications_none_outlined)),
               ],
-            );
-          },
+            ),
+          ),
+          body: Column(
+            children: [
+              // SizedBox(
+              //   width: double.infinity,
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 24),
+              //     child: Text(
+              //       DateFormat('dd MMMM', 'ru').format(DateTime.now()),
+              //       style: Theme.of(context).textTheme.titleLarge,
+              //     ),
+              //   ),
+              // ),
+              // TabBar(
+              //   isScrollable: true,
+              //   unselectedLabelColor: Colors.black,
+              //   labelColor: Colors.black,
+              //   indicatorColor: Colors.black,
+              //   tabs: buildTabs(),
+              // ),
+              SingleChildScrollView(
+                child: BlocBuilder<CalendarCubit, CalendarState>(
+                  builder: (context, state) {
+                    // не делать константой !!! (позже исправлю)
+                    return Column(
+                      children: [
+                        // AboutUser(),
+                        // SizedBox(height: 12),
+                        Calendar(),
+                        SizedBox(height: 12),
+                        DayTaks(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -215,32 +292,32 @@ class Calendar extends StatelessWidget {
   }
 }
 
-class AboutUser extends StatelessWidget {
-  const AboutUser({
-    super.key,
-  });
+// class AboutUser extends StatelessWidget {
+//   const AboutUser({
+//     super.key,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 32,
-            backgroundColor: Colors.grey,
-          ),
-          SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Привет!'),
-              SizedBox(height: 4),
-              Text('Петр Сергеев Петрович'),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Padding(
+//       padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+//       child: Row(
+//         children: [
+//           CircleAvatar(
+//             radius: 32,
+//             backgroundColor: Colors.grey,
+//           ),
+//           SizedBox(width: 10),
+//           Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Text('Привет!'),
+//               SizedBox(height: 4),
+//               Text('Петр Сергеев Петрович'),
+//             ],
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }

@@ -18,6 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TasksState {
   Task? get task => throw _privateConstructorUsedError;
   List<Task> get tasks => throw _privateConstructorUsedError;
+  bool get look => throw _privateConstructorUsedError;
+  bool get to => throw _privateConstructorUsedError;
+  bool get check => throw _privateConstructorUsedError;
+  bool get setting => throw _privateConstructorUsedError;
+  bool get run => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TasksStateCopyWith<TasksState> get copyWith =>
@@ -30,7 +35,14 @@ abstract class $TasksStateCopyWith<$Res> {
           TasksState value, $Res Function(TasksState) then) =
       _$TasksStateCopyWithImpl<$Res, TasksState>;
   @useResult
-  $Res call({Task? task, List<Task> tasks});
+  $Res call(
+      {Task? task,
+      List<Task> tasks,
+      bool look,
+      bool to,
+      bool check,
+      bool setting,
+      bool run});
 
   $TaskCopyWith<$Res>? get task;
 }
@@ -50,6 +62,11 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
   $Res call({
     Object? task = freezed,
     Object? tasks = null,
+    Object? look = null,
+    Object? to = null,
+    Object? check = null,
+    Object? setting = null,
+    Object? run = null,
   }) {
     return _then(_value.copyWith(
       task: freezed == task
@@ -60,6 +77,26 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
+      look: null == look
+          ? _value.look
+          : look // ignore: cast_nullable_to_non_nullable
+              as bool,
+      to: null == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as bool,
+      check: null == check
+          ? _value.check
+          : check // ignore: cast_nullable_to_non_nullable
+              as bool,
+      setting: null == setting
+          ? _value.setting
+          : setting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      run: null == run
+          ? _value.run
+          : run // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -84,7 +121,14 @@ abstract class _$$TasksStateImplCopyWith<$Res>
       __$$TasksStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Task? task, List<Task> tasks});
+  $Res call(
+      {Task? task,
+      List<Task> tasks,
+      bool look,
+      bool to,
+      bool check,
+      bool setting,
+      bool run});
 
   @override
   $TaskCopyWith<$Res>? get task;
@@ -103,6 +147,11 @@ class __$$TasksStateImplCopyWithImpl<$Res>
   $Res call({
     Object? task = freezed,
     Object? tasks = null,
+    Object? look = null,
+    Object? to = null,
+    Object? check = null,
+    Object? setting = null,
+    Object? run = null,
   }) {
     return _then(_$TasksStateImpl(
       task: freezed == task
@@ -113,6 +162,26 @@ class __$$TasksStateImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>,
+      look: null == look
+          ? _value.look
+          : look // ignore: cast_nullable_to_non_nullable
+              as bool,
+      to: null == to
+          ? _value.to
+          : to // ignore: cast_nullable_to_non_nullable
+              as bool,
+      check: null == check
+          ? _value.check
+          : check // ignore: cast_nullable_to_non_nullable
+              as bool,
+      setting: null == setting
+          ? _value.setting
+          : setting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      run: null == run
+          ? _value.run
+          : run // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -120,7 +189,14 @@ class __$$TasksStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TasksStateImpl implements _TasksState {
-  const _$TasksStateImpl({this.task, required final List<Task> tasks})
+  const _$TasksStateImpl(
+      {this.task,
+      required final List<Task> tasks,
+      this.look = false,
+      this.to = false,
+      this.check = false,
+      this.setting = false,
+      this.run = false})
       : _tasks = tasks;
 
   @override
@@ -134,8 +210,24 @@ class _$TasksStateImpl implements _TasksState {
   }
 
   @override
+  @JsonKey()
+  final bool look;
+  @override
+  @JsonKey()
+  final bool to;
+  @override
+  @JsonKey()
+  final bool check;
+  @override
+  @JsonKey()
+  final bool setting;
+  @override
+  @JsonKey()
+  final bool run;
+
+  @override
   String toString() {
-    return 'TasksState(task: $task, tasks: $tasks)';
+    return 'TasksState(task: $task, tasks: $tasks, look: $look, to: $to, check: $check, setting: $setting, run: $run)';
   }
 
   @override
@@ -144,12 +236,24 @@ class _$TasksStateImpl implements _TasksState {
         (other.runtimeType == runtimeType &&
             other is _$TasksStateImpl &&
             (identical(other.task, task) || other.task == task) &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.look, look) || other.look == look) &&
+            (identical(other.to, to) || other.to == to) &&
+            (identical(other.check, check) || other.check == check) &&
+            (identical(other.setting, setting) || other.setting == setting) &&
+            (identical(other.run, run) || other.run == run));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, task, const DeepCollectionEquality().hash(_tasks));
+      runtimeType,
+      task,
+      const DeepCollectionEquality().hash(_tasks),
+      look,
+      to,
+      check,
+      setting,
+      run);
 
   @JsonKey(ignore: true)
   @override
@@ -160,12 +264,28 @@ class _$TasksStateImpl implements _TasksState {
 
 abstract class _TasksState implements TasksState {
   const factory _TasksState(
-      {final Task? task, required final List<Task> tasks}) = _$TasksStateImpl;
+      {final Task? task,
+      required final List<Task> tasks,
+      final bool look,
+      final bool to,
+      final bool check,
+      final bool setting,
+      final bool run}) = _$TasksStateImpl;
 
   @override
   Task? get task;
   @override
   List<Task> get tasks;
+  @override
+  bool get look;
+  @override
+  bool get to;
+  @override
+  bool get check;
+  @override
+  bool get setting;
+  @override
+  bool get run;
   @override
   @JsonKey(ignore: true)
   _$$TasksStateImplCopyWith<_$TasksStateImpl> get copyWith =>

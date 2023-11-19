@@ -17,5 +17,6 @@ class StepCustom with _$StepCustom {
     @JsonKey(name: 'comment') @HiveField(4) String? comment,
   }) = _StepCustom;
 
-  factory StepCustom.fromJson(Map<String, dynamic> json) => _$StepCustomFromJson(json);
+  factory StepCustom.fromJson(Map<String, dynamic> json) =>
+      _$StepCustomFromJson(json);
 }

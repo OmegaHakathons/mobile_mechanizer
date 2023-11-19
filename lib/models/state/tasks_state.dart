@@ -9,5 +9,10 @@ class TasksState with _$TasksState {
   const factory TasksState({
     Task? task,
     required List<Task> tasks,
+    @Default(false) bool look,
+    @Default(false) bool to,
+    @Default(false) bool check,
+    @Default(false) bool setting,
+    @Default(false) bool run,
   }) = _TasksState;
 }

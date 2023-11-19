@@ -45,18 +45,15 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // const LogoText(),
-                  Text(
-                    'ЛОГО + НАЗВАНИЕ',
-                    style: TextStyle(fontSize: 32),
-                  ),
+                  Image.asset('assets/images/icon.png'),
                   const SizedBox(height: 32),
                   Text(
-                    'Вход в личный кабинет',
+                    'Вход в систему',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Для входа в личный кабинет приложите карту или авторизуйтесь по логину',
+                    'Для входа в систему приложите карту или авторизуйтесь по логину',
                     style: Theme.of(context).textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   ),
