@@ -68,7 +68,14 @@ class TaskCubit extends Cubit<TasksState> {
                 element.status != StatusTask.finish)
             .toList()[0]
         : null;
-    emit(state.copyWith(task: newT));
+    emit(state.copyWith(
+      task: newT,
+      look: false,
+      to: false,
+      setting: false,
+      check: false,
+      run: false,
+    ));
   }
 
   void updateCurrentStepIndex() {
