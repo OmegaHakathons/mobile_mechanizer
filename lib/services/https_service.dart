@@ -424,7 +424,7 @@ class HttpsService {
     }
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/task');
     return retry(
@@ -463,7 +463,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final body = json.encode(task);
     final url = Uri.https(_baseUrl, '$_api/task');
@@ -507,7 +507,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     // final body = json.encode(jsonEncode(task));
     final url = Uri.https(_baseUrl, '$_api/task/$id');
@@ -553,7 +553,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final body = json.encode(task);
     final url = Uri.https(_baseUrl, '$_api/task/$id');
@@ -599,7 +599,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/task/$id');
     return retry(
@@ -641,7 +641,7 @@ class HttpsService {
     }
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/car');
     return retry(
@@ -680,7 +680,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final body = json.encode(car);
     final url = Uri.https(_baseUrl, '$_api/car');
@@ -724,7 +724,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     // final body = json.encode(jsonEncode(task));
     final url = Uri.https(_baseUrl, '$_api/car/$id');
@@ -770,7 +770,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final body = json.encode(task);
     final url = Uri.https(_baseUrl, '$_api/car/$id');
@@ -816,7 +816,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/car/$id');
     return retry(
@@ -858,7 +858,7 @@ class HttpsService {
     }
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/aggregate');
     return retry(
@@ -897,7 +897,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final body = json.encode(aggregate);
     final url = Uri.https(_baseUrl, '$_api/aggregate');
@@ -941,7 +941,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     // final body = json.encode(jsonEncode(task));
     final url = Uri.https(_baseUrl, '$_api/aggregate/$id');
@@ -987,7 +987,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final body = json.encode(task);
     final url = Uri.https(_baseUrl, '$_api/aggregate/$id');
@@ -1033,7 +1033,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/aggregate/$id');
     return retry(
@@ -1075,7 +1075,7 @@ class HttpsService {
     }
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/user_data');
     return retry(
@@ -1114,7 +1114,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     // final body = json.encode(jsonEncode(task));
     final url = Uri.https(_baseUrl, '$_api/user_data/$id');
@@ -1159,7 +1159,7 @@ class HttpsService {
     // Map request = {"request_at": DateTime.now().toUtc().toString()};
     Map<String, String> headers = {
       "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
+      // "Authorization": "Bearer $token",
     };
     final url = Uri.https(_baseUrl, '$_api/user_data/$id');
     return retry(
