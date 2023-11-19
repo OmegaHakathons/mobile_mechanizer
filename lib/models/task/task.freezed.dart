@@ -37,10 +37,10 @@ mixin _$Task {
   int? get currentStep => throw _privateConstructorUsedError;
   @JsonKey(name: 'car')
   @HiveField(5)
-  Car get car => throw _privateConstructorUsedError;
+  Car? get car => throw _privateConstructorUsedError;
   @JsonKey(name: 'aggregate')
   @HiveField(6)
-  Aggregate get aggregate => throw _privateConstructorUsedError;
+  Aggregate? get aggregate => throw _privateConstructorUsedError;
   @JsonKey(name: 'field')
   @HiveField(7)
   String get field =>
@@ -68,7 +68,7 @@ mixin _$Task {
   StatusTask get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'executor')
   @HiveField(15)
-  String get executor =>
+  String? get executor =>
       throw _privateConstructorUsedError; // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
   @JsonKey(name: 'money')
   @HiveField(16)
@@ -90,8 +90,8 @@ abstract class $TaskCopyWith<$Res> {
       @JsonKey(name: 'shortDescription') @HiveField(2) String shortDescription,
       @JsonKey(name: 'steps') @HiveField(3) List<StepCustom> steps,
       @JsonKey(name: 'currentStep') @HiveField(4) int? currentStep,
-      @JsonKey(name: 'car') @HiveField(5) Car car,
-      @JsonKey(name: 'aggregate') @HiveField(6) Aggregate aggregate,
+      @JsonKey(name: 'car') @HiveField(5) Car? car,
+      @JsonKey(name: 'aggregate') @HiveField(6) Aggregate? aggregate,
       @JsonKey(name: 'field') @HiveField(7) String field,
       @JsonKey(name: 'minSpeed') @HiveField(8) int minSpeed,
       @JsonKey(name: 'maxSpeed') @HiveField(9) int maxSpeed,
@@ -100,11 +100,11 @@ abstract class $TaskCopyWith<$Res> {
       @JsonKey(name: 'consumption') @HiveField(12) int? consumption,
       @JsonKey(name: 'deadline') @HiveField(13) DateTime deadline,
       @JsonKey(name: 'status') @HiveField(14) StatusTask status,
-      @JsonKey(name: 'executor') @HiveField(15) String executor,
+      @JsonKey(name: 'executor') @HiveField(15) String? executor,
       @JsonKey(name: 'money') @HiveField(16) int? money});
 
-  $CarCopyWith<$Res> get car;
-  $AggregateCopyWith<$Res> get aggregate;
+  $CarCopyWith<$Res>? get car;
+  $AggregateCopyWith<$Res>? get aggregate;
 }
 
 /// @nodoc
@@ -125,8 +125,8 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? shortDescription = null,
     Object? steps = null,
     Object? currentStep = freezed,
-    Object? car = null,
-    Object? aggregate = null,
+    Object? car = freezed,
+    Object? aggregate = freezed,
     Object? field = null,
     Object? minSpeed = null,
     Object? maxSpeed = null,
@@ -135,7 +135,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? consumption = freezed,
     Object? deadline = null,
     Object? status = null,
-    Object? executor = null,
+    Object? executor = freezed,
     Object? money = freezed,
   }) {
     return _then(_value.copyWith(
@@ -159,14 +159,14 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int?,
-      car: null == car
+      car: freezed == car
           ? _value.car
           : car // ignore: cast_nullable_to_non_nullable
-              as Car,
-      aggregate: null == aggregate
+              as Car?,
+      aggregate: freezed == aggregate
           ? _value.aggregate
           : aggregate // ignore: cast_nullable_to_non_nullable
-              as Aggregate,
+              as Aggregate?,
       field: null == field
           ? _value.field
           : field // ignore: cast_nullable_to_non_nullable
@@ -199,10 +199,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusTask,
-      executor: null == executor
+      executor: freezed == executor
           ? _value.executor
           : executor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       money: freezed == money
           ? _value.money
           : money // ignore: cast_nullable_to_non_nullable
@@ -212,16 +212,24 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
 
   @override
   @pragma('vm:prefer-inline')
-  $CarCopyWith<$Res> get car {
-    return $CarCopyWith<$Res>(_value.car, (value) {
+  $CarCopyWith<$Res>? get car {
+    if (_value.car == null) {
+      return null;
+    }
+
+    return $CarCopyWith<$Res>(_value.car!, (value) {
       return _then(_value.copyWith(car: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AggregateCopyWith<$Res> get aggregate {
-    return $AggregateCopyWith<$Res>(_value.aggregate, (value) {
+  $AggregateCopyWith<$Res>? get aggregate {
+    if (_value.aggregate == null) {
+      return null;
+    }
+
+    return $AggregateCopyWith<$Res>(_value.aggregate!, (value) {
       return _then(_value.copyWith(aggregate: value) as $Val);
     });
   }
@@ -240,8 +248,8 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       @JsonKey(name: 'shortDescription') @HiveField(2) String shortDescription,
       @JsonKey(name: 'steps') @HiveField(3) List<StepCustom> steps,
       @JsonKey(name: 'currentStep') @HiveField(4) int? currentStep,
-      @JsonKey(name: 'car') @HiveField(5) Car car,
-      @JsonKey(name: 'aggregate') @HiveField(6) Aggregate aggregate,
+      @JsonKey(name: 'car') @HiveField(5) Car? car,
+      @JsonKey(name: 'aggregate') @HiveField(6) Aggregate? aggregate,
       @JsonKey(name: 'field') @HiveField(7) String field,
       @JsonKey(name: 'minSpeed') @HiveField(8) int minSpeed,
       @JsonKey(name: 'maxSpeed') @HiveField(9) int maxSpeed,
@@ -250,13 +258,13 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       @JsonKey(name: 'consumption') @HiveField(12) int? consumption,
       @JsonKey(name: 'deadline') @HiveField(13) DateTime deadline,
       @JsonKey(name: 'status') @HiveField(14) StatusTask status,
-      @JsonKey(name: 'executor') @HiveField(15) String executor,
+      @JsonKey(name: 'executor') @HiveField(15) String? executor,
       @JsonKey(name: 'money') @HiveField(16) int? money});
 
   @override
-  $CarCopyWith<$Res> get car;
+  $CarCopyWith<$Res>? get car;
   @override
-  $AggregateCopyWith<$Res> get aggregate;
+  $AggregateCopyWith<$Res>? get aggregate;
 }
 
 /// @nodoc
@@ -274,8 +282,8 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? shortDescription = null,
     Object? steps = null,
     Object? currentStep = freezed,
-    Object? car = null,
-    Object? aggregate = null,
+    Object? car = freezed,
+    Object? aggregate = freezed,
     Object? field = null,
     Object? minSpeed = null,
     Object? maxSpeed = null,
@@ -284,7 +292,7 @@ class __$$TaskImplCopyWithImpl<$Res>
     Object? consumption = freezed,
     Object? deadline = null,
     Object? status = null,
-    Object? executor = null,
+    Object? executor = freezed,
     Object? money = freezed,
   }) {
     return _then(_$TaskImpl(
@@ -308,14 +316,14 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int?,
-      car: null == car
+      car: freezed == car
           ? _value.car
           : car // ignore: cast_nullable_to_non_nullable
-              as Car,
-      aggregate: null == aggregate
+              as Car?,
+      aggregate: freezed == aggregate
           ? _value.aggregate
           : aggregate // ignore: cast_nullable_to_non_nullable
-              as Aggregate,
+              as Aggregate?,
       field: null == field
           ? _value.field
           : field // ignore: cast_nullable_to_non_nullable
@@ -348,10 +356,10 @@ class __$$TaskImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StatusTask,
-      executor: null == executor
+      executor: freezed == executor
           ? _value.executor
           : executor // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       money: freezed == money
           ? _value.money
           : money // ignore: cast_nullable_to_non_nullable
@@ -374,8 +382,8 @@ class _$TaskImpl implements _Task {
       @HiveField(3)
       required final List<StepCustom> steps,
       @JsonKey(name: 'currentStep') @HiveField(4) this.currentStep,
-      @JsonKey(name: 'car') @HiveField(5) required this.car,
-      @JsonKey(name: 'aggregate') @HiveField(6) required this.aggregate,
+      @JsonKey(name: 'car') @HiveField(5) this.car,
+      @JsonKey(name: 'aggregate') @HiveField(6) this.aggregate,
       @JsonKey(name: 'field') @HiveField(7) required this.field,
       @JsonKey(name: 'minSpeed') @HiveField(8) required this.minSpeed,
       @JsonKey(name: 'maxSpeed') @HiveField(9) required this.maxSpeed,
@@ -384,7 +392,7 @@ class _$TaskImpl implements _Task {
       @JsonKey(name: 'consumption') @HiveField(12) this.consumption,
       @JsonKey(name: 'deadline') @HiveField(13) required this.deadline,
       @JsonKey(name: 'status') @HiveField(14) required this.status,
-      @JsonKey(name: 'executor') @HiveField(15) required this.executor,
+      @JsonKey(name: 'executor') @HiveField(15) this.executor,
       @JsonKey(name: 'money') @HiveField(16) this.money})
       : _steps = steps;
 
@@ -420,11 +428,11 @@ class _$TaskImpl implements _Task {
   @override
   @JsonKey(name: 'car')
   @HiveField(5)
-  final Car car;
+  final Car? car;
   @override
   @JsonKey(name: 'aggregate')
   @HiveField(6)
-  final Aggregate aggregate;
+  final Aggregate? aggregate;
   @override
   @JsonKey(name: 'field')
   @HiveField(7)
@@ -461,7 +469,7 @@ class _$TaskImpl implements _Task {
   @override
   @JsonKey(name: 'executor')
   @HiveField(15)
-  final String executor;
+  final String? executor;
 // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
   @override
   @JsonKey(name: 'money')
@@ -553,10 +561,8 @@ abstract class _Task implements Task {
       @HiveField(3)
       required final List<StepCustom> steps,
       @JsonKey(name: 'currentStep') @HiveField(4) final int? currentStep,
-      @JsonKey(name: 'car') @HiveField(5) required final Car car,
-      @JsonKey(name: 'aggregate')
-      @HiveField(6)
-      required final Aggregate aggregate,
+      @JsonKey(name: 'car') @HiveField(5) final Car? car,
+      @JsonKey(name: 'aggregate') @HiveField(6) final Aggregate? aggregate,
       @JsonKey(name: 'field') @HiveField(7) required final String field,
       @JsonKey(name: 'minSpeed') @HiveField(8) required final int minSpeed,
       @JsonKey(name: 'maxSpeed') @HiveField(9) required final int maxSpeed,
@@ -567,7 +573,7 @@ abstract class _Task implements Task {
       @HiveField(13)
       required final DateTime deadline,
       @JsonKey(name: 'status') @HiveField(14) required final StatusTask status,
-      @JsonKey(name: 'executor') @HiveField(15) required final String executor,
+      @JsonKey(name: 'executor') @HiveField(15) final String? executor,
       @JsonKey(name: 'money') @HiveField(16) final int? money}) = _$TaskImpl;
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$TaskImpl.fromJson;
@@ -595,11 +601,11 @@ abstract class _Task implements Task {
   @override
   @JsonKey(name: 'car')
   @HiveField(5)
-  Car get car;
+  Car? get car;
   @override
   @JsonKey(name: 'aggregate')
   @HiveField(6)
-  Aggregate get aggregate;
+  Aggregate? get aggregate;
   @override
   @JsonKey(name: 'field')
   @HiveField(7)
@@ -635,7 +641,7 @@ abstract class _Task implements Task {
   @override
   @JsonKey(name: 'executor')
   @HiveField(15)
-  String get executor;
+  String? get executor;
   @override // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
   @JsonKey(name: 'money')
   @HiveField(16)

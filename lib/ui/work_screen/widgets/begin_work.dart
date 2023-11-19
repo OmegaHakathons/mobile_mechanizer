@@ -101,8 +101,8 @@ class MainInfoTask extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Поле: ${task.field}'),
-        Text('Техника: ${task.car.name}'),
-        Text('Агрегат: ${task.aggregate.name}'),
+        Text('Техника: ${task.car?.name}'),
+        Text('Агрегат: ${task.aggregate?.name}'),
         Text(
             'Дата выполнения: ${DateFormat('dd MMMM, EEEE', 'ru').format(task.deadline)}'),
       ],
