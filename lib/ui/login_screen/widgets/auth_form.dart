@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import '../../../common/navigation/route_name.dart';
 import '../../../common/theme/app_colors.dart';
 import '../../../cubits/app_cubit.dart';
-import '../../../cubits/card_cubit.dart';
 import '../../../models/app_tabs.dart';
 import '../../common/out_button.dart';
 
@@ -21,14 +20,8 @@ class _AuthFormState extends State<AuthForm> {
   late TextEditingController passwordController;
   late GlobalKey<FormState> formKey;
 
-  // Future<void> getCards() async {
-  //   final postsCubit = context.read<CardCubit>();
-  //   await postsCubit.getCards();
-  // }
-
   @override
   void initState() {
-    // getCards();
     super.initState();
     loginController = TextEditingController()..text = 'tails';
     passwordController = TextEditingController()..text = 'fox';
@@ -44,7 +37,6 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    // final state = context.watch<CardCubit>().state;
     return Form(
       key: formKey,
       child: Column(
@@ -75,20 +67,21 @@ class _AuthFormState extends State<AuthForm> {
             },
           ),
           const SizedBox(height: 32),
-          OutButton(
-            contentColor: AppColors.blue,
-            fillColor: AppColors.white,
-            text: 'Войти',
-            onTap: () {
-              final future = BlocProvider.of<AppCubit>(context)
-                  .tryAuth(loginController.text, passwordController.text);
-              future.then((result) {
-              if (formKey.currentState!.validate()) {
-                BlocProvider.of<AppCubit>(context).updateTab(AppTabs.work);
-                context.goNamed(RouteName.base);
-              }
-              });
-            },
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+                onPressed: () {
+                  final future = BlocProvider.of<AppCubit>(context)
+                      .tryAuth(loginController.text, passwordController.text);
+                  future.then((result) {
+                    if (formKey.currentState!.validate()) {
+                      BlocProvider.of<AppCubit>(context)
+                          .updateTab(AppTabs.work);
+                      context.goNamed(RouteName.base);
+                    }
+                  });
+                },
+                child: Text('Войти')),
           ),
         ],
       ),

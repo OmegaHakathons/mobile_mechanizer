@@ -84,16 +84,15 @@ class _CustomStepperState extends State<CustomStepper> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // SizedBox(width: iconSize / 2 - dividerWidth / 2),
                   VerticalDivider(
                     width: dividerWidth * iconSize / 2,
                     thickness: dividerWidth,
-                    color: widget.seperatorColor ?? _stepColor(step.status),
+                    color: _stepColor(step.status),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 10),
+                      margin: const EdgeInsets.only(bottom: 10),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 20),
                       decoration: BoxDecoration(
@@ -180,25 +179,32 @@ class _CustomStepperState extends State<CustomStepper> {
 
   Widget _buildIcon(StepCustom step) {
     final status = step.status;
-    return CircleAvatar(
-      radius: iconSize / 2,
-      backgroundColor: widget.seperatorColor ?? _stepColor(step.status),
-    );
+    // return CircleAvatar(
+    //   radius: iconSize / 2,
+    //   backgroundColor: widget.seperatorColor ?? _stepColor(step.status),
+    // );
 
-    // switch (status) {
-    //   case StatusStep.complete:
-    //     return Icon(Icons.check_box, color: completeColor, size: iconSize);
+    switch (status) {
+      case StatusStep.complete:
+        return CircleAvatar(
+          radius: iconSize / 2,
+          backgroundColor: completeColor,
+        );
 
-    //   case StatusStep.inprogress:
-    //     return Icon(Icons.check_box_outlined,
-    //         color: inProgressColor, size: iconSize);
+      case StatusStep.inprogress:
+        return CircleAvatar(
+          radius: iconSize / 2,
+          backgroundColor: inProgressColor,
+        );
 
-    //   case StatusStep.upcoming:
-    //     return Icon(Icons.check_box_outlined,
-    //         color: upComingColor, size: iconSize);
+      case StatusStep.upcoming:
+        return CircleAvatar(
+          radius: iconSize / 2,
+          backgroundColor: upComingColor,
+        );
 
-    //   case StatusStep.fail:
-    //     return Icon(Icons.warning, color: Colors.red, size: iconSize);
-    // }
+      case StatusStep.fail:
+        return Icon(Icons.warning, color: Colors.red, size: iconSize);
+    }
   }
 }

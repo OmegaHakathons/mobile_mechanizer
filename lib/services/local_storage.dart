@@ -24,7 +24,7 @@ Future<CardRepository> initialiseHive() async {
 
   //box
   final box = await Hive.openBox<Task?>(cardKey);
-  final carBox = await Hive.openBox<Car>(cardKey);
+  // final carBox = await Hive.openBox<Car>(cardKey);
   //repos
   return CardRepository(cardBox: box);
 }

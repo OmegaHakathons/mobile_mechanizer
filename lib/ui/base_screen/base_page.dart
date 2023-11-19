@@ -2,16 +2,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nfc_manager/nfc_manager.dart';
-import '../../common/navigation/route_name.dart';
 import '../../common/theme/app_colors.dart';
 import '../../cubits/app_cubit.dart';
 import '../../models/app_tabs.dart';
 import '../../models/state/app_state.dart';
-import '../../models/work.dart';
+import '../../services/https_service.dart';
 import '../calendar_screen/calendar_page.dart';
-import '../main_screen/main_page.dart';
+import '../profile_screen/profile_page.dart';
 import '../work_screen/work_page.dart';
 
 class BottomItem {
@@ -34,17 +31,19 @@ class BasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HttpsService().getTasks().then((value) {
+      log(value.toString());
+    });
     log('перестраиваем base');
     return BlocBuilder<AppCubit, AppState>(
       builder: (context, state) {
         int currentIndex = AppTabs.values.indexOf(state.currentTab);
-        bool isStop = state.currentWork == Work.none;
         return Scaffold(
           body: state.currentTab == AppTabs.work
-              ? WorkPage()
+              ? const WorkPage()
               : state.currentTab == AppTabs.calendar
-                  ? CalendarPage()
-                  : ProfilePage(),
+                  ? const CalendarPage()
+                  : const ProfilePage(),
           bottomNavigationBar: BottomAppBar(
             child: SizedBox(
               height: 60,

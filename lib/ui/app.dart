@@ -3,14 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../common/navigation/router.dart';
 import '../common/theme/light_theme.dart';
-import '../cubits/card_cubit.dart';
-import '../cubits/geo_cubit.dart';
+import '../cubits/calendar_cubit.dart';
 import '../cubits/pin_auth_cubit.dart';
 import '../cubits/app_cubit.dart';
-import '../services/geo_service.dart';
-import '../services/local_storage.dart';
+import '../cubits/task_cubit.dart';
 import '../services/reachability_service.dart';
-import '../services/repository.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -29,14 +26,15 @@ class App extends StatelessWidget {
             // Repository(),
           )..listenToConnectivity(),
         ),
-        // BlocProvider<GeoCubit>(
-        //   create: (_) => GeoCubit(GeoService()),
-        // ),
         BlocProvider<PinAuthCubit>(
           create: (_) => PinAuthCubit(),
         ),
-        // BlocProvider<CardCubit>(
-        //     create: (_) => CardCubit(cardRepository: _cardRepository)),
+        BlocProvider<CalendarCubit>(
+          create: (_) => CalendarCubit(),
+        ),
+        BlocProvider<TaskCubit>(
+          create: (_) => TaskCubit(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

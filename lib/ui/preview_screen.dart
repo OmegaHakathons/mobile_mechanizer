@@ -14,9 +14,7 @@ class PreviewTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BeginWork(
-        task: task,
-      ),
+      body: BeginWork(task: task),
     );
   }
 }

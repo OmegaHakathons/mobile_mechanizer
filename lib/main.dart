@@ -1,5 +1,4 @@
 import 'package:agro_mech/services/repository.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -33,18 +32,5 @@ void main() async {
   Repository().cardRepository = cardRepo;
   // Repository().startGettingRegistr();
 
-  runApp(App());
-
-// You may set the permission requests to "provisional" which allows the user to choose what type
-// of notifications they would like to receive once the user receives a notification.
-//   final notificationSettings =
-//       await FirebaseMessaging.instance.requestPermission(provisional: false);
-
-// // For apple platforms, ensure the APNS token is available before making any FCM plugin API calls
-//   final apnsToken = await FirebaseMessaging.instance.getToken();
-//   if (apnsToken != null) {
-//     log('токен $apnsToken');
-//   }
-
-  runApp(App());
+  runApp(const App());
 }

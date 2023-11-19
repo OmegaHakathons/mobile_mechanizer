@@ -7,7 +7,6 @@ import 'package:nfc_manager/nfc_manager.dart';
 import '../../common/navigation/route_name.dart';
 import '../../common/theme/app_colors.dart';
 import '../../cubits/app_cubit.dart';
-import '../common/logo_text.dart';
 import '../common/wrapper.dart';
 import 'widgets/auth_form.dart';
 
