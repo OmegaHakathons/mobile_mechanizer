@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:agro_mech/models/task/aggregate.dart';
 import 'package:agro_mech/models/task/car.dart';
+import 'package:agro_mech/models/task/status_step.dart';
+import 'package:agro_mech/models/task/status_task.dart';
+import 'package:agro_mech/models/task/step_custom.dart';
 import 'package:agro_mech/models/task/task.dart';
 import 'package:agro_mech/services/reachability_service.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -26,10 +29,13 @@ Future<CardRepository> initialiseHive() async {
   Hive.registerAdapter(TaskAdapter());
   Hive.registerAdapter(CarAdapter());
   Hive.registerAdapter(AggregateAdapter());
+  Hive.registerAdapter(StepCustomAdapter());
+  Hive.registerAdapter(StatusStepAdapter());
+  Hive.registerAdapter(StatusTaskAdapter());
   // Hive.registerAdapter(UserAdapter());
 
   //box
-  final taskBox = await Hive.openBox<Task?>(taskKey);
+  final taskBox = await Hive.openBox<Task>(taskKey);
   final carBox = await Hive.openBox<Car>(carKey);
   final aggregateBox = await Hive.openBox<Aggregate>(aggregateKey);
   // final userBox = await Hive.openBox<User>(aggregateKey);
@@ -40,13 +46,13 @@ Future<CardRepository> initialiseHive() async {
 // }
 
 class CardRepository {
-  CardRepository({required Box<Task?> taskBox, required Box<Car> carBox, required Box<Aggregate> aggBox}) : _taskBox = taskBox, _carBox = carBox, _aggBox = aggBox;
+  CardRepository({required Box<Task> taskBox, required Box<Car> carBox, required Box<Aggregate> aggBox}) : _taskBox = taskBox, _carBox = carBox, _aggBox = aggBox;
 
   final _httpsService = HttpsService();
 
-  final Box<Task?> _taskBox;
-  final Box<Car?> _carBox;
-  final Box<Aggregate?> _aggBox;
+  final Box<Task> _taskBox;
+  final Box<Car> _carBox;
+  final Box<Aggregate> _aggBox;
   // Future<List<CardEkzh>> getCards() async {
   //   log("получаем последнее время обновления");
   //   DateTime? lastUpdate;
@@ -68,7 +74,7 @@ class CardRepository {
   // }
 
   Future getTasks() async {
-    if (ReachabilityService().isNetworkAvailable) {
+    if (await ReachabilityService().isNetworkAvailable) {
       final tasks = await _httpsService.getTasks();
       await addNewTasks(newCards: tasks);
       return tasks;
@@ -77,8 +83,8 @@ class CardRepository {
     }
   }
 
-  Future getCar() async {
-    if (ReachabilityService().isNetworkAvailable) {
+  Future getCars() async {
+    if (await ReachabilityService().isNetworkAvailable) {
       final items = await _httpsService.getCars();
       await addNewCars(cars: items);
       return items;
@@ -87,8 +93,8 @@ class CardRepository {
     }
   }
 
-  Future getAggregate() async {
-    if (ReachabilityService().isNetworkAvailable) {
+  Future getAggregates() async {
+    if (await ReachabilityService().isNetworkAvailable) {
       final items = await _httpsService.getAggregates();
       await addNewAggregates(items: items);
       return items;

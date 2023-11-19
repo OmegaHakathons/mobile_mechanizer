@@ -21,7 +21,7 @@ class ReachabilityService {
       // init logic
   }
 
-  get isNetworkAvailable async => await _connection.hasInternetAccess;
+  Future get isNetworkAvailable async => await _connection.hasInternetAccess;
 
   Stream<InternetStatus> get onStatusChange => _connection.onStatusChange;
 

@@ -431,9 +431,11 @@ class HttpsService {
       () async {
         final response = await _client.get(url, headers: headers);
         if (response.statusCode == 200 || response.statusCode == 201) {
-          var value = jsonDecode(response.body);
+          List value = jsonDecode(response.body);
+          final values = value.map((e) => Task.fromJson(e)).toList();
+
           log('получение тасок');
-          return value;
+          return values;
         } else {
           throw Exception("Failed to logIn");
         }
@@ -452,6 +454,7 @@ class HttpsService {
         log('сохранили таску на потом');
         return await Repository().savePendingRequest(request);
       }
+      throw '';
     });
   }
   
@@ -648,9 +651,10 @@ class HttpsService {
       () async {
         final response = await _client.get(url, headers: headers);
         if (response.statusCode == 200 || response.statusCode == 201) {
-          var value = jsonDecode(response.body);
+          List value = jsonDecode(response.body);
+          final values = value.map((e) => Car.fromJson(e)).toList();
           log('получение Cars');
-          return value;
+          return values;
         } else {
           throw Exception("Failed to logIn");
         }
@@ -669,6 +673,7 @@ class HttpsService {
         log('сохранили Cars на потом');
         return await Repository().savePendingRequest(request);
       }
+      throw '';
     });
   }
   
@@ -865,9 +870,10 @@ class HttpsService {
       () async {
         final response = await _client.get(url, headers: headers);
         if (response.statusCode == 200 || response.statusCode == 201) {
-          var value = jsonDecode(response.body);
+          List value = jsonDecode(response.body);
+          final values = value.map((e) => Aggregate.fromJson(e)).toList();
           log('получение Aggregates');
-          return value;
+          return values;
         } else {
           throw Exception("Failed to logIn");
         }
@@ -886,6 +892,7 @@ class HttpsService {
         log('сохранили Aggregates на потом');
         return await Repository().savePendingRequest(request);
       }
+      throw '';
     });
   }
   

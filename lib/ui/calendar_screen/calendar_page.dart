@@ -82,7 +82,7 @@ class TaskCard extends StatelessWidget {
               Text(task.type.name),
               const SizedBox(height: 12),
               Text('Поле: ${task.field}'),
-              Text('Техника: ${task.car.name}'),
+              Text('Техника: ${task.car?.name}'),
               Text('Приоритет: ДОБАВИТЬ'),
             ],
           ),
