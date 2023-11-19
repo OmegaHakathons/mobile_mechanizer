@@ -20,8 +20,8 @@ class Task with _$Task {
     @JsonKey(name: 'shortDescription') @HiveField(2) required String shortDescription,
     @JsonKey(name: 'steps') @HiveField(3) required List<StepCustom> steps,
     @JsonKey(name: 'currentStep') @HiveField(4) int? currentStep,
-    @JsonKey(name: 'car') @HiveField(5) required Car car,
-    @JsonKey(name: 'aggregate') @HiveField(6) required Aggregate aggregate,
+    @JsonKey(name: 'car') @HiveField(5) Car? car,
+    @JsonKey(name: 'aggregate') @HiveField(6) Aggregate? aggregate,
     @JsonKey(name: 'field') @HiveField(7) required String field, // пока просто, в будущем класс с местоположением
     @JsonKey(name: 'minSpeed') @HiveField(8) required int minSpeed,
     @JsonKey(name: 'maxSpeed') @HiveField(9) required int maxSpeed,
@@ -30,7 +30,7 @@ class Task with _$Task {
     @JsonKey(name: 'consumption') @HiveField(12) int? consumption,
     @JsonKey(name: 'deadline') @HiveField(13) required DateTime deadline,
     @JsonKey(name: 'status') @HiveField(14) required StatusTask status,
-    @JsonKey(name: 'executor') @HiveField(15) required String executor, // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
+    @JsonKey(name: 'executor') @HiveField(15) String? executor, // ПЕРЕДЕЛАТЬ НА КЛАСС !!!!!!!!!!!!!!!!!!!!
     @JsonKey(name: 'money') @HiveField(16) int? money,
   }) = _Task;
 

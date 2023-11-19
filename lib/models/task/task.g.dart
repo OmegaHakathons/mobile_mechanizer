@@ -22,8 +22,8 @@ class TaskAdapter extends TypeAdapter<_$TaskImpl> {
       shortDescription: fields[2] as String,
       steps: (fields[3] as List).cast<StepCustom>(),
       currentStep: fields[4] as int?,
-      car: fields[5] as Car,
-      aggregate: fields[6] as Aggregate,
+      car: fields[5] as Car?,
+      aggregate: fields[6] as Aggregate?,
       field: fields[7] as String,
       minSpeed: fields[8] as int,
       maxSpeed: fields[9] as int,
@@ -32,7 +32,7 @@ class TaskAdapter extends TypeAdapter<_$TaskImpl> {
       consumption: fields[12] as int?,
       deadline: fields[13] as DateTime,
       status: fields[14] as StatusTask,
-      executor: fields[15] as String,
+      executor: fields[15] as String?,
       money: fields[16] as int?,
     );
   }
@@ -100,8 +100,12 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
           .map((e) => StepCustom.fromJson(e as Map<String, dynamic>))
           .toList(),
       currentStep: json['currentStep'] as int?,
-      car: Car.fromJson(json['car'] as Map<String, dynamic>),
-      aggregate: Aggregate.fromJson(json['aggregate'] as Map<String, dynamic>),
+      car: json['car'] == null
+          ? null
+          : Car.fromJson(json['car'] as Map<String, dynamic>),
+      aggregate: json['aggregate'] == null
+          ? null
+          : Aggregate.fromJson(json['aggregate'] as Map<String, dynamic>),
       field: json['field'] as String,
       minSpeed: json['minSpeed'] as int,
       maxSpeed: json['maxSpeed'] as int,
@@ -110,7 +114,7 @@ _$TaskImpl _$$TaskImplFromJson(Map<String, dynamic> json) => _$TaskImpl(
       consumption: json['consumption'] as int?,
       deadline: DateTime.parse(json['deadline'] as String),
       status: $enumDecode(_$StatusTaskEnumMap, json['status']),
-      executor: json['executor'] as String,
+      executor: json['executor'] as String?,
       money: json['money'] as int?,
     );
 
