@@ -32,7 +32,7 @@ class BasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HttpsService().getTasks().then((value) {
-      log(value.toString());
+      log('таски пришли ' + value.toString());
     });
     log('перестраиваем base');
     return BlocBuilder<AppCubit, AppState>(

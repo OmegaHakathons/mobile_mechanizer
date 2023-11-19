@@ -32,8 +32,11 @@ class BeginWork extends StatelessWidget {
           : Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, bottom: 60, top: 16),
+                  padding: EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: curTask?.id == task?.id ? 60 : 16,
+                      top: 16),
                   // color: Colors.pink.withOpacity(0.2),
                   child: SingleChildScrollView(
                     child: Column(

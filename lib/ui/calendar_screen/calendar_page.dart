@@ -153,7 +153,7 @@ class Calendar extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           SizedBox(
-            height: 106,
+            height: 84,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(

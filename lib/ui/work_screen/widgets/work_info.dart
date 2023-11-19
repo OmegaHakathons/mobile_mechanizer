@@ -68,8 +68,8 @@ class WorkInfo extends StatelessWidget {
                       const SizedBox(height: 16),
                       Text(task.steps[stepNumber].description),
                       Expanded(
-                          child: Center(
-                        child: Text('ДОП ИНФА'),
+                          child: Column(
+                        children: [],
                       )),
                       isFinish
                           ? SizedBox(
